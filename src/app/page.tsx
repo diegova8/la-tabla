@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className="flex flex-col w-full bg-[var(--cream)]">
       {/* Hero Section */}
-      <section className="relative h-[780px] w-full bg-[var(--black-primary)]">
+      <section className="relative min-h-[600px] md:min-h-[700px] lg:h-[780px] w-full bg-[var(--black-primary)]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -12,23 +12,23 @@ export default function Home() {
           }}
         />
         <div className="absolute inset-0 bg-[#0A0A0A99]" />
-        <div className="relative flex h-full flex-col justify-center gap-6 px-[120px] max-w-[800px]">
-          <span className="inline-flex self-start rounded-full bg-[var(--gold-muted)] px-5 py-2.5 text-[13px] font-medium tracking-[0.5px] text-[var(--gold-light)] font-body border border-[var(--gold-primary)]/30">
+        <div className="relative flex h-full flex-col justify-center gap-5 md:gap-6 px-6 md:px-12 lg:px-[120px] py-20 md:py-24 max-w-[800px]">
+          <span className="inline-flex self-start rounded-full bg-[var(--gold-muted)] px-4 md:px-5 py-2 md:py-2.5 text-[11px] md:text-[13px] font-medium tracking-[0.5px] text-[var(--gold-light)] font-body border border-[var(--gold-primary)]/30">
             Experiencias exclusivas desde 2020
           </span>
-          <h1 className="text-[64px] font-bold leading-[1.1] text-[var(--text-light)] font-display">
+          <h1 className="text-[36px] sm:text-[44px] md:text-[52px] lg:text-[64px] font-bold leading-[1.1] text-[var(--text-light)] font-display">
             Experiencias gastronómicas
             <br />
             gourmet a domicilio
           </h1>
-          <p className="max-w-[600px] text-lg leading-[1.6] text-[var(--text-light-muted)] font-body">
+          <p className="max-w-[600px] text-base md:text-lg leading-[1.6] text-[var(--text-light-muted)] font-body">
             Tablas de quesos artesanales, charcutería premium y servicios de chef privado para eventos, celebraciones y momentos especiales.
           </p>
-          <div className="flex gap-5">
-            <button className="rounded-lg bg-[var(--gold-primary)] px-9 py-[18px] text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-5">
+            <button className="rounded-lg bg-[var(--gold-primary)] px-6 md:px-9 py-4 md:py-[18px] text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
               Ordenar ahora
             </button>
-            <button className="rounded-lg border border-[var(--gold-primary)]/50 bg-[var(--gold-primary)]/10 px-9 py-[18px] text-base font-semibold text-[var(--gold-light)] font-body hover:bg-[var(--gold-primary)]/20 transition-colors">
+            <button className="rounded-lg border border-[var(--gold-primary)]/50 bg-[var(--gold-primary)]/10 px-6 md:px-9 py-4 md:py-[18px] text-base font-semibold text-[var(--gold-light)] font-body hover:bg-[var(--gold-primary)]/20 transition-colors">
               Cotizar evento
             </button>
           </div>
@@ -36,55 +36,55 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="flex flex-col gap-12 bg-[var(--ivory)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
+      <section className="flex flex-col gap-8 md:gap-12 bg-[var(--ivory)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
             NUESTRA HISTORIA
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
             Pasión por la gastronomía,
-            <br />
+            <br className="hidden sm:block" />
             compromiso con la excelencia
           </h2>
         </div>
-        <div className="flex gap-[60px]">
-          <div className="flex flex-1 flex-col gap-6">
-            <p className="text-lg leading-[1.7] text-[var(--text-dark-muted)] font-body">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-[60px]">
+          <div className="flex flex-1 flex-col gap-4 md:gap-6">
+            <p className="text-base md:text-lg leading-[1.7] text-[var(--text-dark-muted)] font-body">
               Creamos experiencias gastronómicas únicas que transforman tus eventos y celebraciones en momentos inolvidables. Desde nuestras icónicas tablas de charcutería hasta servicios de chef privado, cada detalle está cuidadosamente diseñado para deleitar tus sentidos.
             </p>
-            <p className="text-lg leading-[1.7] text-[var(--text-dark-muted)] font-body">
+            <p className="text-base md:text-lg leading-[1.7] text-[var(--text-dark-muted)] font-body">
               Trabajamos exclusivamente con ingredientes de la más alta calidad, inspirados en la tradición mediterránea y española. Nuestro equipo de chefs expertos combina técnica profesional con presentación artística para crear experiencias que sorprenden y enamoran.
             </p>
           </div>
-          <div className="flex w-[380px] flex-col gap-8">
-            <div className="flex flex-col gap-2 rounded-xl bg-[var(--black-primary)] p-8 border border-[var(--gold-primary)]/20">
-              <span className="text-[42px] font-bold text-[var(--gold-primary)] font-display">500+</span>
-              <span className="text-base font-medium text-[var(--text-light-muted)] font-body">Eventos realizados</span>
+          <div className="flex flex-row lg:flex-col lg:w-[380px] gap-4 md:gap-8">
+            <div className="flex flex-1 flex-col gap-2 rounded-xl bg-[var(--black-primary)] p-6 md:p-8 border border-[var(--gold-primary)]/20">
+              <span className="text-3xl md:text-[42px] font-bold text-[var(--gold-primary)] font-display">500+</span>
+              <span className="text-sm md:text-base font-medium text-[var(--text-light-muted)] font-body">Eventos realizados</span>
             </div>
-            <div className="flex flex-col gap-2 rounded-xl bg-[var(--black-primary)] p-8 border border-[var(--gold-primary)]/20">
-              <span className="text-[42px] font-bold text-[var(--gold-primary)] font-display">100%</span>
-              <span className="text-base font-medium text-[var(--text-light-muted)] font-body">Ingredientes premium</span>
+            <div className="flex flex-1 flex-col gap-2 rounded-xl bg-[var(--black-primary)] p-6 md:p-8 border border-[var(--gold-primary)]/20">
+              <span className="text-3xl md:text-[42px] font-bold text-[var(--gold-primary)] font-display">100%</span>
+              <span className="text-sm md:text-base font-medium text-[var(--text-light-muted)] font-body">Ingredientes premium</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Products Section */}
-      <section className="flex flex-col gap-14 bg-[var(--black-soft)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
+      <section className="flex flex-col gap-10 md:gap-14 bg-[var(--black-soft)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
             TABLAS ARTESANALES
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
             Nuestras tablas de charcutería
           </h2>
-          <p className="text-center text-lg text-[var(--text-light-muted)] font-body">
+          <p className="text-center text-base md:text-lg text-[var(--text-light-muted)] font-body">
             Perfectas para cualquier ocasión, desde cenas íntimas hasta grandes celebraciones
           </p>
         </div>
 
         {/* Product Grid - 3 cards */}
-        <div className="flex gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           <ProductCard
             image="/images/tabla1.png"
             title="Salamanca"
@@ -109,20 +109,20 @@ export default function Home() {
         </div>
 
         {/* Featured Product Card */}
-        <div className="flex h-[360px] overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
+        <div className="flex flex-col md:flex-row h-auto md:h-[360px] overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
           <div
-            className="h-full w-[480px] rounded-l-2xl bg-cover bg-center"
+            className="h-[240px] md:h-full w-full md:w-[400px] lg:w-[480px] bg-cover bg-center"
             style={{ backgroundImage: "url('/images/tabla1.png')" }}
           />
-          <div className="flex flex-1 flex-col justify-center gap-5 p-10">
-            <h3 className="text-4xl font-bold text-[var(--text-light)] font-display">Serrano</h3>
-            <span className="text-base font-medium text-[var(--gold-primary)] font-body">8-10 personas</span>
-            <p className="text-base leading-[1.7] text-[var(--text-light-muted)] font-body">
+          <div className="flex flex-1 flex-col justify-center gap-4 md:gap-5 p-6 md:p-10">
+            <h3 className="text-2xl md:text-4xl font-bold text-[var(--text-light)] font-display">Serrano</h3>
+            <span className="text-sm md:text-base font-medium text-[var(--gold-primary)] font-body">8-10 personas</span>
+            <p className="text-sm md:text-base leading-[1.7] text-[var(--text-light-muted)] font-body">
               La experiencia definitiva. Tabla espectacular con 10+ quesos internacionales, charcutería premium, frutas de temporada, frutos secos, mermeladas artesanales y más.
             </p>
-            <div className="flex items-center justify-between">
-              <span className="text-2xl font-semibold text-[var(--gold-light)] font-body">$185</span>
-              <button className="rounded-lg bg-[var(--gold-primary)] px-8 py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <span className="text-xl md:text-2xl font-semibold text-[var(--gold-light)] font-body">$185</span>
+              <button className="w-full sm:w-auto rounded-lg bg-[var(--gold-primary)] px-6 md:px-8 py-3 md:py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
                 Ordenar ahora
               </button>
             </div>
@@ -131,62 +131,62 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section className="flex flex-col gap-14 bg-[var(--black-primary)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
+      <section className="flex flex-col gap-10 md:gap-14 bg-[var(--black-primary)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
             EVENTOS EXCLUSIVOS
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
             Grazing tables para tus eventos
           </h2>
-          <p className="text-center text-lg text-[var(--text-light-muted)] font-body">
+          <p className="text-center text-base md:text-lg text-[var(--text-light-muted)] font-body">
             Impresionantes mesas de degustación para bodas, eventos corporativos y celebraciones
           </p>
         </div>
-        <div className="flex gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Regular Event Card */}
-          <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
+          <div className="flex flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
             <div
-              className="h-[180px] bg-cover bg-center"
+              className="h-[160px] md:h-[180px] bg-cover bg-center"
               style={{ backgroundImage: "url('/images/evento3.png')" }}
             />
-            <div className="flex flex-col gap-6 p-8">
-            <h3 className="text-[28px] font-bold text-[var(--text-light)] font-display">Grazing Table Regular</h3>
-            <ul className="flex flex-col gap-3">
-              <li className="text-base text-[var(--text-light-muted)] font-body">• Mínimo 20 personas</li>
-              <li className="text-base text-[var(--text-light-muted)] font-body">• Selección de 8 quesos artesanales</li>
-              <li className="text-base text-[var(--text-light-muted)] font-body">• Charcutería premium variada</li>
-              <li className="text-base text-[var(--text-light-muted)] font-body">• Frutas frescas y secas</li>
-              <li className="text-base text-[var(--text-light-muted)] font-body">• Presentación elegante</li>
+            <div className="flex flex-col gap-4 md:gap-6 p-6 md:p-8">
+            <h3 className="text-2xl md:text-[28px] font-bold text-[var(--text-light)] font-display">Grazing Table Regular</h3>
+            <ul className="flex flex-col gap-2 md:gap-3">
+              <li className="text-sm md:text-base text-[var(--text-light-muted)] font-body">• Mínimo 20 personas</li>
+              <li className="text-sm md:text-base text-[var(--text-light-muted)] font-body">• Selección de 8 quesos artesanales</li>
+              <li className="text-sm md:text-base text-[var(--text-light-muted)] font-body">• Charcutería premium variada</li>
+              <li className="text-sm md:text-base text-[var(--text-light-muted)] font-body">• Frutas frescas y secas</li>
+              <li className="text-sm md:text-base text-[var(--text-light-muted)] font-body">• Presentación elegante</li>
             </ul>
-            <span className="text-2xl font-semibold text-[var(--gold-primary)] font-body">Desde $18 por persona</span>
-            <button className="w-full rounded-lg bg-[var(--gold-primary)] py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+            <span className="text-xl md:text-2xl font-semibold text-[var(--gold-primary)] font-body">Desde $18 por persona</span>
+            <button className="w-full rounded-lg bg-[var(--gold-primary)] py-3 md:py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
               Cotizar mi evento
             </button>
             </div>
           </div>
 
           {/* Premium Event Card */}
-          <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-[var(--gold-primary)]">
+          <div className="flex flex-col overflow-hidden rounded-2xl bg-[var(--gold-primary)]">
             <div
-              className="h-[180px] bg-cover bg-center"
+              className="h-[160px] md:h-[180px] bg-cover bg-center"
               style={{ backgroundImage: "url('/images/evento1.png')" }}
             />
-            <div className="flex flex-col gap-6 p-8">
+            <div className="flex flex-col gap-4 md:gap-6 p-6 md:p-8">
             <span className="self-start rounded-full bg-[var(--black-primary)]/20 px-3.5 py-1.5 text-[11px] font-bold tracking-[1px] text-[var(--black-primary)] font-body">
               MÁS POPULAR
             </span>
-            <h3 className="text-[28px] font-bold text-[var(--black-primary)] font-display">Grazing Table Premium</h3>
-            <ul className="flex flex-col gap-3">
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Mínimo 30 personas</li>
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Selección de 12 quesos premium</li>
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Charcutería ibérica de lujo</li>
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Frutas exóticas y frutos secos gourmet</li>
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Decoración artística personalizada</li>
-              <li className="text-base text-[var(--black-primary)]/80 font-body">• Servicio de montaje incluido</li>
+            <h3 className="text-2xl md:text-[28px] font-bold text-[var(--black-primary)] font-display">Grazing Table Premium</h3>
+            <ul className="flex flex-col gap-2 md:gap-3">
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Mínimo 30 personas</li>
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Selección de 12 quesos premium</li>
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Charcutería ibérica de lujo</li>
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Frutas exóticas y frutos secos gourmet</li>
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Decoración artística personalizada</li>
+              <li className="text-sm md:text-base text-[var(--black-primary)]/80 font-body">• Servicio de montaje incluido</li>
             </ul>
-            <span className="text-2xl font-semibold text-[var(--black-primary)] font-body">Desde $28 por persona</span>
-            <button className="w-full rounded-lg bg-[var(--black-primary)] py-4 text-base font-semibold text-[var(--gold-primary)] font-body hover:bg-[var(--black-soft)] transition-colors">
+            <span className="text-xl md:text-2xl font-semibold text-[var(--black-primary)] font-body">Desde $28 por persona</span>
+            <button className="w-full rounded-lg bg-[var(--black-primary)] py-3 md:py-4 text-base font-semibold text-[var(--gold-primary)] font-body hover:bg-[var(--black-soft)] transition-colors">
               Cotizar mi evento
             </button>
             </div>
@@ -195,35 +195,35 @@ export default function Home() {
       </section>
 
       {/* Specialties Section */}
-      <section className="flex flex-col gap-14 bg-[var(--ivory)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
+      <section className="flex flex-col gap-10 md:gap-14 bg-[var(--ivory)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
             COMPLEMENTOS GOURMET
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
             Especialidades del chef
           </h2>
-          <p className="text-center text-lg text-[var(--text-dark-muted)] font-body">
+          <p className="text-center text-base md:text-lg text-[var(--text-dark-muted)] font-body">
             Platos premium para complementar tu experiencia gastronómica
           </p>
         </div>
 
         {/* Specialties Grid Row 1 */}
-        <div className="flex gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <SpecialtyCard
-            icon={<UtensilsCrossed className="h-8 w-8 text-[var(--gold-primary)]" />}
+            icon={<UtensilsCrossed className="h-7 w-7 md:h-8 md:w-8 text-[var(--gold-primary)]" />}
             title="Paella Tradicional"
             description="Auténtica paella valenciana preparada por nuestro chef. Mínimo 8 personas."
             price="$22/persona"
           />
           <SpecialtyCard
-            icon={<Wine className="h-8 w-8 text-[var(--gold-primary)]" />}
+            icon={<Wine className="h-7 w-7 md:h-8 md:w-8 text-[var(--gold-primary)]" />}
             title="Risotto Gourmet"
             description="Risotto cremoso con hongos porcini y parmesano añejo. Mínimo 6 personas."
             price="$18/persona"
           />
           <SpecialtyCard
-            icon={<Cake className="h-8 w-8 text-[var(--gold-primary)]" />}
+            icon={<Cake className="h-7 w-7 md:h-8 md:w-8 text-[var(--gold-primary)]" />}
             title="Tabla de Postres"
             description="Selección de postres artesanales, frutas frescas y chocolates premium."
             price="Desde $65"
@@ -231,7 +231,7 @@ export default function Home() {
         </div>
 
         {/* Specialties Grid Row 2 */}
-        <div className="flex gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <SpecialtyCardSimple
             title="Pavo Thanksgiving"
             description="Pavo completo con relleno gourmet y guarniciones tradicionales. 10-12 personas."
@@ -251,19 +251,19 @@ export default function Home() {
       </section>
 
       {/* Experiences Section */}
-      <section className="flex flex-col gap-14 bg-[var(--black-soft)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
+      <section className="flex flex-col gap-10 md:gap-14 bg-[var(--black-soft)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
             APRENDE Y DISFRUTA
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
             Experiencias y clases
           </h2>
-          <p className="text-center text-lg text-[var(--text-light-muted)] font-body">
+          <p className="text-center text-base md:text-lg text-[var(--text-light-muted)] font-body">
             Aprende el arte de la charcutería con nuestros expertos o disfruta de un chef privado
           </p>
         </div>
-        <div className="flex gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
           <ExperienceCard
             image="/images/clase-grupal.png"
             title="Clase presencial"
@@ -304,16 +304,16 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="flex flex-col items-center gap-16 bg-[var(--ivory)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
+      <section className="flex flex-col items-center gap-10 md:gap-16 bg-[var(--ivory)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-dark)] font-body">
             PROCESO SIMPLE
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-dark)] font-display">
             Cómo funciona
           </h2>
         </div>
-        <div className="flex gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 w-full">
           <StepCard
             number="1"
             title="Elige tu experiencia"
@@ -330,43 +330,43 @@ export default function Home() {
             description="Recibe tu pedido en la fecha acordada y disfruta de una experiencia gourmet inolvidable"
           />
         </div>
-        <div className="flex w-[800px] flex-col gap-3 rounded-xl bg-[var(--black-primary)] p-8 border border-[var(--gold-primary)]/20">
-          <h4 className="text-lg font-semibold text-[var(--gold-primary)] font-body">Información importante</h4>
-          <p className="text-[15px] text-[var(--text-light-muted)] font-body">• Costo de entrega según ubicación (consultar al reservar)</p>
-          <p className="text-[15px] text-[var(--text-light-muted)] font-body">• Pedidos con mínimo 48 horas de anticipación</p>
-          <p className="text-[15px] text-[var(--text-light-muted)] font-body">• Eventos grandes requieren 7 días de anticipación</p>
+        <div className="flex w-full max-w-[800px] flex-col gap-3 rounded-xl bg-[var(--black-primary)] p-6 md:p-8 border border-[var(--gold-primary)]/20">
+          <h4 className="text-base md:text-lg font-semibold text-[var(--gold-primary)] font-body">Información importante</h4>
+          <p className="text-sm md:text-[15px] text-[var(--text-light-muted)] font-body">• Costo de entrega según ubicación (consultar al reservar)</p>
+          <p className="text-sm md:text-[15px] text-[var(--text-light-muted)] font-body">• Pedidos con mínimo 48 horas de anticipación</p>
+          <p className="text-sm md:text-[15px] text-[var(--text-light-muted)] font-body">• Eventos grandes requieren 7 días de anticipación</p>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="flex flex-col gap-14 bg-[var(--black-primary)] px-[120px] py-[100px]">
-        <div className="flex flex-col items-center gap-4">
-          <span className="text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
+      <section className="flex flex-col gap-10 md:gap-14 bg-[var(--black-primary)] px-6 md:px-12 lg:px-[120px] py-16 md:py-20 lg:py-[100px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4">
+          <span className="text-[11px] md:text-xs font-semibold tracking-[2px] text-[var(--gold-primary)] font-body">
             CONTÁCTANOS
           </span>
-          <h2 className="text-center text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
+          <h2 className="text-center text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.2] text-[var(--text-light)] font-display">
             Reserva tu experiencia gourmet
           </h2>
-          <p className="text-center text-lg text-[var(--text-light-muted)] font-body">
+          <p className="text-center text-base md:text-lg text-[var(--text-light-muted)] font-body">
             Estamos aquí para crear la experiencia perfecta para ti
           </p>
         </div>
-        <div className="flex gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
           {/* Contact Info */}
-          <div className="flex flex-1 flex-col gap-8">
-            <div className="flex flex-col gap-5 rounded-xl bg-[var(--black-medium)] p-8 border border-[var(--gold-primary)]/20">
-              <h3 className="text-2xl font-bold text-[var(--text-light)] font-display">WhatsApp</h3>
-              <p className="leading-[1.6] text-[var(--text-light-subtle)] font-body">
+          <div className="flex flex-col gap-4 md:gap-8">
+            <div className="flex flex-col gap-4 md:gap-5 rounded-xl bg-[var(--black-medium)] p-6 md:p-8 border border-[var(--gold-primary)]/20">
+              <h3 className="text-xl md:text-2xl font-bold text-[var(--text-light)] font-display">WhatsApp</h3>
+              <p className="text-sm md:text-base leading-[1.6] text-[var(--text-light-subtle)] font-body">
                 La forma más rápida de reservar. Respuesta inmediata durante horario de atención.
               </p>
-              <button className="w-full rounded-lg bg-[var(--gold-primary)] py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+              <button className="w-full rounded-lg bg-[var(--gold-primary)] py-3 md:py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
                 Enviar mensaje
               </button>
             </div>
-            <div className="flex flex-col gap-4 rounded-xl bg-[var(--black-medium)] p-8 border border-[var(--gold-primary)]/20">
-              <h3 className="text-2xl font-bold text-[var(--text-light)] font-display">Teléfono</h3>
-              <span className="text-[28px] font-semibold text-[var(--gold-primary)] font-body">+1 (555) 123-4567</span>
-              <p className="leading-[1.8] text-[var(--text-light-subtle)] font-body">
+            <div className="flex flex-col gap-3 md:gap-4 rounded-xl bg-[var(--black-medium)] p-6 md:p-8 border border-[var(--gold-primary)]/20">
+              <h3 className="text-xl md:text-2xl font-bold text-[var(--text-light)] font-display">Teléfono</h3>
+              <span className="text-2xl md:text-[28px] font-semibold text-[var(--gold-primary)] font-body">+1 (555) 123-4567</span>
+              <p className="text-sm md:text-base leading-[1.8] text-[var(--text-light-subtle)] font-body">
                 Lun - Sáb: 9:00 AM - 8:00 PM
                 <br />
                 Dom: 10:00 AM - 6:00 PM
@@ -375,33 +375,33 @@ export default function Home() {
           </div>
 
           {/* Contact Form */}
-          <div className="flex flex-1 flex-col gap-6 rounded-xl bg-[var(--black-medium)] p-9 border border-[var(--gold-primary)]/20">
-            <h3 className="text-2xl font-bold text-[var(--text-light)] font-display">Solicita una cotización</h3>
-            <p className="leading-[1.6] text-[var(--text-light-subtle)] font-body">
+          <div className="flex flex-col gap-4 md:gap-6 rounded-xl bg-[var(--black-medium)] p-6 md:p-9 border border-[var(--gold-primary)]/20">
+            <h3 className="text-xl md:text-2xl font-bold text-[var(--text-light)] font-display">Solicita una cotización</h3>
+            <p className="text-sm md:text-base leading-[1.6] text-[var(--text-light-subtle)] font-body">
               Cuéntanos sobre tu evento y te responderemos con una propuesta personalizada
             </p>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3 md:gap-4">
               <input
                 type="text"
                 placeholder="Tu nombre"
-                className="h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
+                className="h-12 md:h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
               />
               <input
                 type="email"
                 placeholder="Tu email"
-                className="h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
+                className="h-12 md:h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
               />
               <input
                 type="tel"
                 placeholder="Tu teléfono"
-                className="h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
+                className="h-12 md:h-[52px] rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] px-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
               />
               <textarea
                 placeholder="Cuéntanos sobre tu evento..."
-                className="h-[120px] resize-none rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] p-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
+                className="h-[100px] md:h-[120px] resize-none rounded-lg border border-[var(--gold-primary)]/30 bg-[var(--black-soft)] p-4 text-[var(--text-light)] placeholder:text-[var(--text-light-subtle)] font-body focus:outline-none focus:border-[var(--gold-primary)]"
               />
             </div>
-            <button className="w-full rounded-lg bg-[var(--gold-primary)] py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+            <button className="w-full rounded-lg bg-[var(--gold-primary)] py-3 md:py-4 text-base font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
               Enviar solicitud
             </button>
           </div>
@@ -410,38 +410,38 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="flex flex-col bg-[var(--black-primary)]">
-        <div className="flex gap-20 px-[120px] py-20">
-          <div className="flex w-[400px] flex-col gap-5">
-            <span className="text-[28px] font-bold text-[var(--gold-primary)] font-display">Gourmet Experience</span>
-            <p className="leading-[1.7] text-[var(--text-light-subtle)] font-body">
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 px-6 md:px-12 lg:px-[120px] py-12 md:py-16 lg:py-20">
+          <div className="flex lg:w-[400px] flex-col gap-4 md:gap-5">
+            <span className="text-2xl md:text-[28px] font-bold text-[var(--gold-primary)] font-display">Gourmet Experience</span>
+            <p className="text-sm md:text-base leading-[1.7] text-[var(--text-light-subtle)] font-body">
               Experiencias gastronómicas que transforman momentos ordinarios en recuerdos extraordinarios.
             </p>
           </div>
-          <div className="flex flex-1 gap-20">
-            <div className="flex flex-1 flex-col gap-4">
-              <h4 className="text-base font-semibold text-[var(--gold-primary)] font-body">Productos</h4>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Tablas de charcutería</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Grazing tables</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Especialidades</a>
+          <div className="grid grid-cols-2 md:grid-cols-3 flex-1 gap-8 lg:gap-20">
+            <div className="flex flex-col gap-3 md:gap-4">
+              <h4 className="text-sm md:text-base font-semibold text-[var(--gold-primary)] font-body">Productos</h4>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Tablas de charcutería</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Grazing tables</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Especialidades</a>
             </div>
-            <div className="flex flex-1 flex-col gap-4">
-              <h4 className="text-base font-semibold text-[var(--gold-primary)] font-body">Servicios</h4>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Clases presenciales</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Talleres virtuales</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Chef privado</a>
+            <div className="flex flex-col gap-3 md:gap-4">
+              <h4 className="text-sm md:text-base font-semibold text-[var(--gold-primary)] font-body">Servicios</h4>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Clases presenciales</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Talleres virtuales</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Chef privado</a>
             </div>
-            <div className="flex flex-1 flex-col gap-4">
-              <h4 className="text-base font-semibold text-[var(--gold-primary)] font-body">Empresa</h4>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Sobre nosotros</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Contacto</a>
-              <a href="#" className="text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Términos y condiciones</a>
+            <div className="flex flex-col gap-3 md:gap-4 col-span-2 md:col-span-1">
+              <h4 className="text-sm md:text-base font-semibold text-[var(--gold-primary)] font-body">Empresa</h4>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Sobre nosotros</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Contacto</a>
+              <a href="#" className="text-sm md:text-[15px] text-[var(--text-light-subtle)] hover:text-[var(--gold-light)] font-body transition-colors">Términos y condiciones</a>
             </div>
           </div>
         </div>
         <div className="h-px w-full bg-[var(--gold-primary)]/20" />
-        <div className="flex items-center justify-between px-[120px] py-8">
-          <span className="text-sm text-[var(--text-light-subtle)] font-body">© 2024 Gourmet Experience. Todos los derechos reservados.</span>
-          <span className="text-sm text-[var(--gold-primary)] font-body">Instagram • Facebook • WhatsApp</span>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-12 lg:px-[120px] py-6 md:py-8">
+          <span className="text-xs md:text-sm text-[var(--text-light-subtle)] font-body text-center md:text-left">© 2024 Gourmet Experience. Todos los derechos reservados.</span>
+          <span className="text-xs md:text-sm text-[var(--gold-primary)] font-body">Instagram • Facebook • WhatsApp</span>
         </div>
       </footer>
     </main>
@@ -463,18 +463,18 @@ function ProductCard({
   price: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
+    <div className="flex flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
       <div
-        className="h-[280px] bg-cover bg-center"
+        className="h-[200px] md:h-[280px] bg-cover bg-center"
         style={{ backgroundImage: `url('${image}')` }}
       />
-      <div className="flex flex-col gap-4 p-7">
-        <h3 className="text-[28px] font-bold text-[var(--text-light)] font-display">{title}</h3>
-        <span className="text-sm font-medium text-[var(--gold-primary)] font-body">{subtitle}</span>
-        <p className="text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
+      <div className="flex flex-col gap-3 md:gap-4 p-5 md:p-7">
+        <h3 className="text-xl md:text-[28px] font-bold text-[var(--text-light)] font-display">{title}</h3>
+        <span className="text-xs md:text-sm font-medium text-[var(--gold-primary)] font-body">{subtitle}</span>
+        <p className="text-sm md:text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-semibold text-[var(--gold-light)] font-body">{price}</span>
-          <button className="rounded-lg bg-[var(--gold-primary)] px-6 py-3 text-sm font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+          <span className="text-xl md:text-2xl font-semibold text-[var(--gold-light)] font-body">{price}</span>
+          <button className="rounded-lg bg-[var(--gold-primary)] px-4 md:px-6 py-2.5 md:py-3 text-sm font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
             Ordenar
           </button>
         </div>
@@ -496,11 +496,11 @@ function SpecialtyCard({
   price: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col gap-4 rounded-xl bg-[var(--black-primary)] p-7 border border-[var(--gold-primary)]/20">
+    <div className="flex flex-col gap-3 md:gap-4 rounded-xl bg-[var(--black-primary)] p-5 md:p-7 border border-[var(--gold-primary)]/20">
       {icon}
-      <h3 className="text-[22px] font-bold text-[var(--text-light)] font-display">{title}</h3>
-      <p className="text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
-      <span className="text-lg font-semibold text-[var(--gold-primary)] font-body">{price}</span>
+      <h3 className="text-lg md:text-[22px] font-bold text-[var(--text-light)] font-display">{title}</h3>
+      <p className="text-sm md:text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
+      <span className="text-base md:text-lg font-semibold text-[var(--gold-primary)] font-body">{price}</span>
     </div>
   );
 }
@@ -516,10 +516,10 @@ function SpecialtyCardSimple({
   price: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col gap-4 rounded-xl bg-[var(--black-primary)] p-7 border border-[var(--gold-primary)]/20">
-      <h3 className="text-[22px] font-bold text-[var(--text-light)] font-display">{title}</h3>
-      <p className="text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
-      <span className="text-lg font-semibold text-[var(--gold-primary)] font-body">{price}</span>
+    <div className="flex flex-col gap-3 md:gap-4 rounded-xl bg-[var(--black-primary)] p-5 md:p-7 border border-[var(--gold-primary)]/20">
+      <h3 className="text-lg md:text-[22px] font-bold text-[var(--text-light)] font-display">{title}</h3>
+      <p className="text-sm md:text-[15px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
+      <span className="text-base md:text-lg font-semibold text-[var(--gold-primary)] font-body">{price}</span>
     </div>
   );
 }
@@ -539,20 +539,20 @@ function ExperienceCard({
   price: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
+    <div className="flex flex-col overflow-hidden rounded-2xl bg-[var(--black-medium)] border border-[var(--gold-primary)]/20">
       <div
-        className="h-[200px] bg-cover bg-center"
+        className="h-[160px] md:h-[200px] bg-cover bg-center"
         style={{ backgroundImage: `url('${image}')` }}
       />
-      <div className="flex flex-col gap-4 p-7">
-        <h3 className="text-[24px] font-bold text-[var(--text-light)] font-display">{title}</h3>
-        <p className="text-[14px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
-        <p className="text-sm leading-[1.8] text-[var(--text-light-subtle)] font-body whitespace-pre-line">
+      <div className="flex flex-col gap-3 md:gap-4 p-5 md:p-7">
+        <h3 className="text-xl md:text-[24px] font-bold text-[var(--text-light)] font-display">{title}</h3>
+        <p className="text-sm md:text-[14px] leading-[1.6] text-[var(--text-light-muted)] font-body">{description}</p>
+        <p className="text-xs md:text-sm leading-[1.8] text-[var(--text-light-subtle)] font-body whitespace-pre-line">
           {details.map((detail) => `• ${detail}`).join('\n')}
         </p>
-        <div className="flex items-center justify-between">
-          <span className="text-xl font-semibold text-[var(--gold-primary)] font-body">{price}</span>
-          <button className="rounded-lg bg-[var(--gold-primary)] px-5 py-2.5 text-sm font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <span className="text-lg md:text-xl font-semibold text-[var(--gold-primary)] font-body">{price}</span>
+          <button className="w-full sm:w-auto rounded-lg bg-[var(--gold-primary)] px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold text-[var(--black-primary)] font-body hover:bg-[var(--gold-light)] transition-colors">
             Reservar
           </button>
         </div>
@@ -572,12 +572,12 @@ function StepCard({
   description: string;
 }) {
   return (
-    <div className="flex flex-1 flex-col items-center gap-5">
-      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--gold-primary)]">
-        <span className="text-4xl font-bold text-[var(--black-primary)] font-display">{number}</span>
+    <div className="flex flex-col items-center gap-4 md:gap-5">
+      <div className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full bg-[var(--gold-primary)]">
+        <span className="text-3xl md:text-4xl font-bold text-[var(--black-primary)] font-display">{number}</span>
       </div>
-      <h3 className="text-center text-2xl font-bold text-[var(--text-dark)] font-display">{title}</h3>
-      <p className="text-center text-base leading-[1.6] text-[var(--text-dark-muted)] font-body">{description}</p>
+      <h3 className="text-center text-xl md:text-2xl font-bold text-[var(--text-dark)] font-display">{title}</h3>
+      <p className="text-center text-sm md:text-base leading-[1.6] text-[var(--text-dark-muted)] font-body">{description}</p>
     </div>
   );
 }
