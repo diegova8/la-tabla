@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gourmet Experience | Experiencias gastronómicas a domicilio",
-  description: "Tablas de quesos artesanales, charcutería premium y servicios de chef privado para eventos, celebraciones y momentos especiales.",
+  title: "La Tabla | Artisanal Charcuterie Experiences",
+  description: "Artisanal charcuterie experiences for the discerning host. Curated boards for every occasion, from intimate gatherings to grand celebrations.",
 };
 
 export default function RootLayout({
@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="h-full">
+    <html lang="en" className="h-full">
       <body
-        className={`${playfair.variable} ${inter.variable} antialiased h-full font-body`}
+        className={`${cormorant.variable} ${inter.variable} antialiased h-full font-body`}
       >
         {children}
       </body>
