@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -27,6 +28,8 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       .returning();
 
     if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    revalidatePath("/admin/productos");
+    revalidatePath("/tablas");
     return NextResponse.json(product);
   } catch (error) {
     console.error("PUT /api/products/[id] error:", error);
@@ -45,6 +48,8 @@ export async function DELETE(_request: NextRequest, { params }: { params: Promis
       .returning();
 
     if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    revalidatePath("/admin/productos");
+    revalidatePath("/tablas");
     return NextResponse.json({ message: "Product deactivated", product });
   } catch (error) {
     console.error("DELETE /api/products/[id] error:", error);
