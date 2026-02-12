@@ -113,6 +113,7 @@ export async function POST(request: NextRequest) {
       })
     );
 
+    console.log("📧 Sending order emails to:", email);
     sendOrderEmails({
       orderNumber,
       customerName: name,

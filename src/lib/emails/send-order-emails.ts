@@ -67,10 +67,13 @@ export async function sendOrderEmails(params: SendOrderEmailsParams) {
     }),
   ]);
 
-  // Log failures but don't throw
+  // Log all results
   results.forEach((r, i) => {
-    if (r.status === "rejected") {
-      console.error(`Email ${i === 0 ? "customer" : "admin"} failed:`, r.reason);
+    const label = i === 0 ? "customer" : "admin";
+    if (r.status === "fulfilled") {
+      console.log(`✅ Email ${label} sent:`, JSON.stringify(r.value));
+    } else {
+      console.error(`❌ Email ${label} failed:`, r.reason);
     }
   });
 
