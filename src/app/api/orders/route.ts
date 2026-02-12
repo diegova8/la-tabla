@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
-import { orders, orderItems, orderItemIngredients } from "@/db/schema";
-import { desc } from "drizzle-orm";
+import { orders, orderItems, orderItemIngredients, products } from "@/db/schema";
+import { desc, eq } from "drizzle-orm";
+import { sendOrderEmails } from "@/lib/emails/send-order-emails";
 
 function generateOrderNumber(): string {
   const now = new Date();
@@ -93,6 +94,39 @@ export async function POST(request: NextRequest) {
         }
       }
     }
+
+    // Send confirmation emails (non-blocking)
+    const emailItems = await Promise.all(
+      items.map(async (item: any) => {
+        let productName = item.name || "Producto";
+        if (item.productId) {
+          const [prod] = await db.select({ name: products.name }).from(products).where(eq(products.id, item.productId)).limit(1);
+          if (prod) productName = prod.name;
+        }
+        return {
+          name: productName,
+          quantity: item.quantity || 1,
+          unitPrice: item.unitPrice,
+          totalPrice: (parseFloat(item.unitPrice) * (item.quantity || 1)).toFixed(2),
+          notes: item.notes,
+        };
+      })
+    );
+
+    sendOrderEmails({
+      orderNumber,
+      customerName: name,
+      customerEmail: email,
+      items: emailItems,
+      subtotal: subtotal.toFixed(2),
+      deliveryCost: deliveryCost.toFixed(2),
+      total: total.toFixed(2),
+      deliveryMethod,
+      deliveryDate,
+      deliveryAddress: address,
+      paymentMethod,
+      notes,
+    }).catch((err) => console.error("Email send error:", err));
 
     return NextResponse.json({ orderNumber, orderId: order.id }, { status: 201 });
   } catch (error) {
