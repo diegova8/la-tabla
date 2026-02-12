@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { Heading } from "@/components/ui/heading";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ShoppingCart } from "lucide-react";

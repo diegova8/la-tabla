@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { DollarSign, ShoppingCart, Package, TrendingUp } from "lucide-react";
 import { Heading } from "@/components/ui/heading";
 import { StatsCard } from "@/components/admin/stats-card";
