@@ -121,9 +121,6 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
     <!-- CTA -->
     <div style="padding:0 24px 32px;text-align:center;">
       <p style="color:#8b7355;font-size:14px;margin:0 0 16px;">Te contactaremos para confirmar los detalles de tu pedido.</p>
-      <a href="https://wa.me/50688888888" style="display:inline-block;padding:12px 32px;background:#1a1a1a;color:#d4a853;text-decoration:none;border-radius:6px;font-weight:600;font-size:14px;">
-        💬 Contactar por WhatsApp
-      </a>
     </div>
 
     <!-- Footer -->

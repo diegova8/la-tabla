@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Card } from "@/components/ui/card";
-import { Instagram, MessageCircle, Mail, Clock, MapPin } from "lucide-react";
+import { Instagram, Mail, Clock, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contacto — La Tabla",
@@ -11,15 +11,6 @@ export const metadata: Metadata = {
 };
 
 const contactMethods = [
-  {
-    icon: MessageCircle,
-    title: "WhatsApp",
-    description: "Escribinos para pedidos y cotizaciones",
-    action: "Enviar mensaje",
-    href: "https://wa.me/50688888888?text=Hola!%20Me%20interesa%20una%20tabla%20de%20La%20Tabla",
-    color: "text-green-600",
-    bg: "bg-green-50",
-  },
   {
     icon: Instagram,
     title: "Instagram",
@@ -52,7 +43,7 @@ export default function ContactoPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
           {contactMethods.map((method) => (
             <a
               key={method.title}
