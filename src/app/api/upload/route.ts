@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { put } from "@vercel/blob";
+
+const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 export async function POST(request: NextRequest) {
-  // TODO: Implement real upload with Vercel Blob
-  // TODO: Add auth check (admin only)
   try {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
@@ -11,16 +13,33 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Mock response — replace with Vercel Blob upload
-    const mockUrl = `/uploads/${Date.now()}-${file.name}`;
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: "Invalid file type. Only JPEG, PNG, and WebP are allowed." },
+        { status: 400 }
+      );
+    }
 
-    return NextResponse.json({
-      url: mockUrl,
-      filename: file.name,
-      size: file.size,
-    }, { status: 201 });
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: "File too large. Maximum size is 5MB." },
+        { status: 400 }
+      );
+    }
+
+    const blob = await put(file.name, file, {
+      access: "public",
+    });
+
+    return NextResponse.json(
+      { url: blob.url, filename: file.name, size: file.size },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("POST /api/upload error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

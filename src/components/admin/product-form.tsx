@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/admin/image-upload";
 
 interface Product {
   id?: number;
@@ -20,6 +21,7 @@ interface Product {
   isConfigurable: boolean;
   isFixed: boolean;
   displayOrder: number;
+  imageUrl: string;
 }
 
 const defaultProduct: Product = {
@@ -34,6 +36,7 @@ const defaultProduct: Product = {
   isConfigurable: false,
   isFixed: false,
   displayOrder: 0,
+  imageUrl: "",
 };
 
 function slugify(text: string): string {
@@ -118,6 +121,12 @@ export function ProductForm({ product, onClose }: { product?: Product & { id: nu
 
           <Input label="Descripción corta" value={form.shortDesc} onChange={(e) => update("shortDesc", e.target.value)} />
           <Textarea label="Descripción" value={form.description} onChange={(e) => update("description", e.target.value)} />
+
+          <ImageUpload
+            label="Imagen del producto"
+            value={form.imageUrl}
+            onChange={(url) => update("imageUrl", url)}
+          />
 
           <div className="flex gap-4">
             <label className="flex items-center gap-2 text-sm text-stone-700">

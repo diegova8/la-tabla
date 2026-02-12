@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/admin/image-upload";
 
 interface Category {
   id: number;
@@ -111,7 +112,11 @@ export function IngredientForm({
               onChange={(e) => update("costUnit", e.target.value)}
             />
           </div>
-          <Input label="URL de imagen" value={form.imageUrl} onChange={(e) => update("imageUrl", e.target.value)} />
+          <ImageUpload
+            label="Imagen"
+            value={form.imageUrl}
+            onChange={(url) => update("imageUrl", url)}
+          />
           <label className="flex items-center gap-2 text-sm text-stone-700">
             <input type="checkbox" checked={form.available} onChange={(e) => update("available", e.target.checked)} className="rounded border-stone-300" />
             Disponible

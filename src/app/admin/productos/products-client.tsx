@@ -73,6 +73,7 @@ export function ProductsClient({ products, typeLabels }: { products: Product[]; 
             isConfigurable: editProduct.isConfigurable ?? false,
             isFixed: editProduct.isFixed ?? false,
             displayOrder: editProduct.displayOrder ?? 0,
+            imageUrl: (editProduct as any).imageUrl ?? "",
           } : undefined}
           onClose={() => setShowForm(false)}
         />
