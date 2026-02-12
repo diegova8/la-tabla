@@ -3,14 +3,25 @@ import Link from "next/link";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/landing/hero";
+import { FeaturedProducts } from "@/components/landing/featured-products";
 import { ProcessSection } from "@/components/landing/process-section";
 import { DeliveryZones } from "@/components/landing/delivery-zones";
 import { FAQ } from "@/components/landing/faq";
+import { db } from "@/db";
+import { products } from "@/db/schema";
+import { eq, and, asc } from "drizzle-orm";
+import { PRODUCT_TYPES } from "@/lib/constants";
 
-// TODO: fetch featured products from DB
-// import { FeaturedProducts } from "@/components/landing/featured-products";
+export default async function Home() {
+  const [featuredTablas, featuredEspecialidades] = await Promise.all([
+    db.select().from(products).where(
+      and(eq(products.type, PRODUCT_TYPES.TABLA), eq(products.isActive, true))
+    ).orderBy(asc(products.displayOrder)).limit(3),
+    db.select().from(products).where(
+      and(eq(products.type, PRODUCT_TYPES.ESPECIALIDAD), eq(products.isActive, true))
+    ).orderBy(asc(products.displayOrder)).limit(3),
+  ]);
 
-export default function Home() {
   return (
     <>
       <a href="#main" className="skip-to-content">
@@ -20,17 +31,27 @@ export default function Home() {
       <main id="main">
         <Hero />
 
-        {/* TODO: Featured tablas section */}
-        {/* <FeaturedProducts
-          title="Nuestras tablas"
-          description="Personalizá tu tabla perfecta con los mejores ingredientes."
-          products={[]}
-          basePath="/tablas"
-          viewAllHref="/tablas"
-          viewAllLabel="Ver todas las tablas"
-        /> */}
+        {featuredTablas.length > 0 && (
+          <FeaturedProducts
+            title="Nuestras Tablas"
+            description="Personalizá tu tabla perfecta con los mejores ingredientes."
+            products={featuredTablas}
+            basePath="/tablas"
+            viewAllHref="/tablas"
+            viewAllLabel="Ver todas las tablas"
+          />
+        )}
 
-        {/* TODO: Featured especialidades section */}
+        {featuredEspecialidades.length > 0 && (
+          <FeaturedProducts
+            title="Especialidades del Chef"
+            description="Platos únicos preparados por el Chef Stewart para tu evento."
+            products={featuredEspecialidades}
+            basePath="/especialidades"
+            viewAllHref="/especialidades"
+            viewAllLabel="Ver especialidades"
+          />
+        )}
 
         <ProcessSection />
 
