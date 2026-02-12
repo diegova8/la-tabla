@@ -52,6 +52,24 @@ export function ProductsClient({ products, typeLabels }: { products: Product[]; 
     }
   };
 
+  const handleReactivate = async (id: number) => {
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isActive: true }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Error al reactivar producto");
+        return;
+      }
+      router.refresh();
+    } catch (err) {
+      alert("Error de conexión al reactivar producto");
+    }
+  };
+
   const handleEdit = (product: Product) => {
     setEditProduct(product);
     setShowForm(true);
@@ -136,12 +154,18 @@ export function ProductsClient({ products, typeLabels }: { products: Product[]; 
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => handleEdit(product)} className="p-1 text-stone-400 hover:text-amber-700">
+                        <button onClick={() => handleEdit(product)} className="p-1 text-stone-400 hover:text-amber-700" title="Editar">
                           <Pencil className="h-4 w-4" />
                         </button>
-                        <button onClick={() => handleDelete(product.id)} className="p-1 text-stone-400 hover:text-red-600">
-                          <Trash2 className="h-4 w-4" />
-                        </button>
+                        {product.isActive ? (
+                          <button onClick={() => handleDelete(product.id)} className="p-1 text-stone-400 hover:text-red-600" title="Desactivar">
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        ) : (
+                          <button onClick={() => handleReactivate(product.id)} className="p-1 text-green-500 hover:text-green-700 text-xs font-medium" title="Reactivar">
+                            ✓
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>
