@@ -39,8 +39,17 @@ export function ProductsClient({ products, typeLabels }: { products: Product[]; 
 
   const handleDelete = async (id: number) => {
     if (!confirm("¿Desactivar este producto?")) return;
-    await fetch(`/api/products/${id}`, { method: "DELETE" });
-    router.refresh();
+    try {
+      const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.error || "Error al eliminar producto");
+        return;
+      }
+      router.refresh();
+    } catch (err) {
+      alert("Error de conexión al eliminar producto");
+    }
   };
 
   const handleEdit = (product: Product) => {
