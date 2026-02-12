@@ -27,8 +27,8 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
       <tr>
         <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;">${item.name}${item.notes ? `<br><small style="color:#8b7355;">${item.notes}</small>` : ""}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:center;">${item.quantity}</td>
-        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">₡${Number(item.unitPrice).toLocaleString("es-CR")}</td>
-        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">₡${Number(item.totalPrice).toLocaleString("es-CR")}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">$${Number(item.unitPrice).toLocaleString("es-CR")}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">$${Number(item.totalPrice).toLocaleString("es-CR")}</td>
       </tr>`
     )
     .join("");
@@ -83,16 +83,16 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
       <div style="margin-top:16px;padding:16px;background:#faf7f2;border-radius:8px;">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
           <span style="color:#8b7355;">Subtotal</span>
-          <span style="color:#1a1a1a;">₡${Number(data.subtotal).toLocaleString("es-CR")}</span>
+          <span style="color:#1a1a1a;">$${Number(data.subtotal).toLocaleString("es-CR")}</span>
         </div>
         ${Number(data.deliveryCost) > 0 ? `
         <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
           <span style="color:#8b7355;">Envío</span>
-          <span style="color:#1a1a1a;">₡${Number(data.deliveryCost).toLocaleString("es-CR")}</span>
+          <span style="color:#1a1a1a;">$${Number(data.deliveryCost).toLocaleString("es-CR")}</span>
         </div>` : ""}
         <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:2px solid #d4a853;">
           <strong style="color:#1a1a1a;font-size:16px;">Total</strong>
-          <strong style="color:#1a1a1a;font-size:18px;">₡${Number(data.total).toLocaleString("es-CR")}</strong>
+          <strong style="color:#1a1a1a;font-size:18px;">$${Number(data.total).toLocaleString("es-CR")}</strong>
         </div>
       </div>
     </div>
@@ -141,7 +141,7 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
 
 export function buildOrderConfirmationText(data: OrderEmailData): string {
   const items = data.items
-    .map((i) => `• ${i.name} x${i.quantity} — ₡${Number(i.totalPrice).toLocaleString("es-CR")}`)
+    .map((i) => `• ${i.name} x${i.quantity} — $${Number(i.totalPrice).toLocaleString("es-CR")}`)
     .join("\n");
 
   return `¡Pedido Confirmado! 🎉
@@ -150,7 +150,7 @@ Hola ${data.customerName}, recibimos tu pedido #${data.orderNumber}.
 
 ${items}
 
-Total: ₡${Number(data.total).toLocaleString("es-CR")}
+Total: $${Number(data.total).toLocaleString("es-CR")}
 Entrega: ${data.deliveryDate}
 Pago: ${data.paymentMethod || "Por confirmar"}
 

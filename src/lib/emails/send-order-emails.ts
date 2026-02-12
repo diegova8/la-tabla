@@ -61,7 +61,7 @@ export async function sendOrderEmails(params: SendOrderEmailsParams) {
     resend.emails.send({
       from: FROM_EMAIL,
       to: ADMIN_EMAIL,
-      subject: `🧀 Nuevo pedido #${params.orderNumber} — ₡${Number(params.total).toLocaleString("es-CR")}`,
+      subject: `🧀 Nuevo pedido #${params.orderNumber} — $${Number(params.total).toLocaleString("es-CR")}`,
       html,
       text,
     }),

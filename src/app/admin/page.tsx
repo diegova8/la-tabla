@@ -38,7 +38,7 @@ export default async function AdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <StatsCard
           title="Ventas de hoy"
-          value={`₡${Number(todayOrders.total).toLocaleString()}`}
+          value={`$${Number(todayOrders.total).toLocaleString()}`}
           icon={DollarSign}
         />
         <StatsCard
