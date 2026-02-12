@@ -10,6 +10,8 @@ const footerLinks = {
     { href: "/talleres", label: "Talleres" },
   ],
   Información: [
+    { href: "/sobre-nosotros", label: "Sobre nosotros" },
+    { href: "/contacto", label: "Contacto" },
     { href: "/#proceso", label: "Cómo funciona" },
     { href: "/#entregas", label: "Zonas de entrega" },
     { href: "/#faq", label: "Preguntas frecuentes" },

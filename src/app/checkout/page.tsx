@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
@@ -18,6 +18,14 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, getTotal, clearCart } = useCartStore();
   const [loading, setLoading] = useState(false);
+  const [slots, setSlots] = useState<{ id: number; label: string }[]>([]);
+
+  useEffect(() => {
+    fetch("/api/delivery-slots")
+      .then((r) => r.json())
+      .then((data) => setSlots(data))
+      .catch(console.error);
+  }, []);
 
   // Calculate min date (today + 2 days)
   const minDate = new Date();
@@ -142,19 +150,13 @@ export default function CheckoutPage() {
                       onChange={(e) => update("deliveryDate", e.target.value)}
                       hint="Mínimo 2 días de anticipación"
                     />
-                    {/* TODO: fetch delivery slots from DB */}
                     <Select
                       label="Franja horaria"
                       placeholder="Seleccioná una franja"
-                      options={[
-                        { value: "9-10", label: "9:00 - 10:00 AM" },
-                        { value: "10-11", label: "10:00 - 11:00 AM" },
-                        { value: "11-12", label: "11:00 AM - 12:00 PM" },
-                        { value: "12-13", label: "12:00 - 1:00 PM" },
-                        { value: "14-15", label: "2:00 - 3:00 PM" },
-                        { value: "15-16", label: "3:00 - 4:00 PM" },
-                        { value: "16-17", label: "4:00 - 5:00 PM" },
-                      ]}
+                      options={slots.map((s) => ({
+                        value: String(s.id),
+                        label: s.label,
+                      }))}
                       value={form.deliverySlot}
                       onChange={(e) => update("deliverySlot", e.target.value)}
                     />

@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       status: "pending",
       deliveryMethod,
       deliveryDate,
-      deliverySlotId: null, // TODO: map delivery slot selection to slot ID
+      deliverySlotId: deliverySlot ? parseInt(deliverySlot) : null,
       deliveryAddress: address || null,
       deliveryCost: deliveryCost.toFixed(2),
       subtotal: subtotal.toFixed(2),

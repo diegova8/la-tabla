@@ -14,6 +14,8 @@ const navLinks = [
   { href: "/especialidades", label: "Especialidades" },
   { href: "/servicios", label: "Servicios" },
   { href: "/talleres", label: "Talleres" },
+  { href: "/sobre-nosotros", label: "Nosotros" },
+  { href: "/contacto", label: "Contacto" },
 ];
 
 export function Navbar() {
