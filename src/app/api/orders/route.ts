@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders, orderItems, orderItemIngredients, products } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
-import { sendOrderEmails } from "@/lib/emails/send-order-emails";
+// Dynamic import to prevent build failures
+
 
 function generateOrderNumber(): string {
   const now = new Date();
@@ -59,7 +60,7 @@ export async function POST(request: NextRequest) {
       status: "pending",
       deliveryMethod,
       deliveryDate,
-      deliverySlotId: deliverySlot ? parseInt(deliverySlot) : null,
+      deliverySlotId: null, // TODO: map delivery slot selection to slot ID
       deliveryAddress: address || null,
       deliveryCost: deliveryCost.toFixed(2),
       subtotal: subtotal.toFixed(2),
@@ -114,7 +115,7 @@ export async function POST(request: NextRequest) {
     );
 
     console.log("📧 Sending order emails to:", email);
-    sendOrderEmails({
+    import("@/lib/emails/send-order-emails").then(({ sendOrderEmails }) => sendOrderEmails({
       orderNumber,
       customerName: name,
       customerEmail: email,
@@ -127,11 +128,11 @@ export async function POST(request: NextRequest) {
       deliveryAddress: address,
       paymentMethod,
       notes,
-    }).catch((err) => console.error("Email send error:", err));
+    })).catch((err) => console.error("Email send error:", err));
 
     return NextResponse.json({ orderNumber, orderId: order.id }, { status: 201 });
   } catch (error) {
-    console.error("POST /api/orders error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    console.error("POST /api/orders error:", error instanceof Error ? error.message : error);
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Internal server error" }, { status: 500 });
   }
 }
