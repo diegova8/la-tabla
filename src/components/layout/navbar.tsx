@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ShoppingBag, Menu, X, User } from "lucide-react";
+import { ShoppingBag, Menu, X } from "lucide-react";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Container } from "@/components/ui/container";
 import { IconButton } from "@/components/ui/icon-button";
 import { useCartStore } from "@/store/cart-store";
@@ -46,12 +47,17 @@ export function Navbar() {
           </ul>
 
           {/* Actions */}
-          <div className="flex items-center gap-2">
-            <Link href="/cuenta" aria-label="Mi cuenta">
-              <IconButton label="Mi cuenta" size="sm">
-                <User className="h-5 w-5" />
-              </IconButton>
-            </Link>
+          <div className="flex items-center gap-3">
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">
+                  Iniciar sesión
+                </button>
+              </SignInButton>
+            </SignedOut>
 
             <Link href="/carrito" className="relative" aria-label="Carrito">
               <IconButton label="Carrito" size="sm">
