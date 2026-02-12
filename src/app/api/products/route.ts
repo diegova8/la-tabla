@@ -56,9 +56,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(product, { status: 201 });
   } catch (error: any) {
     console.error("POST /api/products error:", error);
-    if (error?.message?.includes("unique")) {
-      return NextResponse.json({ error: "A product with that slug already exists" }, { status: 409 });
+    const msg = error?.message || error?.detail || String(error);
+    if (msg.includes("unique") || msg.includes("duplicate") || msg.includes("23505")) {
+      return NextResponse.json({ error: "Ya existe un producto con ese slug" }, { status: 409 });
     }
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error", detail: msg }, { status: 500 });
   }
 }
