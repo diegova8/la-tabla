@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { IngredientPicker } from "@/components/products/ingredient-picker";
 import { Textarea } from "@/components/ui/textarea";
 import { useCartStore } from "@/store/cart-store";
+import { useToast } from "@/components/ui/toast";
 
 interface Rule {
   categoryId: number;
@@ -41,6 +42,7 @@ export function TablaBuilderWrapper({
   const [notes, setNotes] = useState("");
   const [added, setAdded] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const { toast } = useToast();
 
   const isComplete =
     !product.isConfigurable ||
@@ -73,6 +75,7 @@ export function TablaBuilderWrapper({
     });
 
     setAdded(true);
+    toast(`${product.name} agregado al carrito`);
     setTimeout(() => setAdded(false), 2000);
   };
 

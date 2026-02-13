@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { QuantitySelector } from "@/components/ui/quantity-selector";
 import { useCartStore } from "@/store/cart-store";
+import { useToast } from "@/components/ui/toast";
 
 interface ProductDetailProps {
   product: {
@@ -29,6 +30,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [notes, setNotes] = useState("");
   const [added, setAdded] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const { toast } = useToast();
 
   const handleAddToCart = () => {
     addItem({
@@ -42,6 +44,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     });
 
     setAdded(true);
+    toast(`${product.name} agregado al carrito`);
     setTimeout(() => setAdded(false), 2000);
   };
 
