@@ -1,7 +1,7 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const ADMIN_EMAILS = ["dvargas.dev@gmail.com"];
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.trim()).filter(Boolean);
 
 export async function requireAdmin(): Promise<{ authorized: true } | NextResponse> {
   const { userId } = await auth();

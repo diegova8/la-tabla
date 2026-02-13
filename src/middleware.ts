@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 
-const ADMIN_EMAILS = [
-  "dvargas.dev@gmail.com",
-];
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.trim()).filter(Boolean);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isAdminRoute(req)) {

@@ -1,9 +1,13 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders, orderItems, products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
   try {
     const { id } = await params;
     const [order] = await db.select().from(orders).where(eq(orders.id, parseInt(id)));
@@ -32,15 +36,22 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 }
 
 export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  // TODO: Add auth check (admin only)
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
   try {
     const { id } = await params;
     const body = await request.json();
     const { status, paymentStatus } = body;
 
     const validStatuses = ["pending", "confirmed", "preparing", "ready", "delivered", "cancelled"];
+    const validPaymentStatuses = ["pending", "verified", "rejected"];
+
     if (status && !validStatuses.includes(status)) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+    }
+    if (paymentStatus && !validPaymentStatuses.includes(paymentStatus)) {
+      return NextResponse.json({ error: "Invalid payment status" }, { status: 400 });
     }
 
     const updateData: Record<string, any> = { updatedAt: new Date() };

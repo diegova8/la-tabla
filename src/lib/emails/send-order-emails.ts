@@ -27,7 +27,7 @@ interface SendOrderEmailsParams {
   notes?: string | null;
 }
 
-const ADMIN_EMAIL = "dvargas.dev@gmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL || process.env.ADMIN_EMAILS?.split(",")[0] || "";
 
 export async function sendOrderEmails(params: SendOrderEmailsParams) {
   const emailData = {

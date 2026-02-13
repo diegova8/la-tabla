@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, LayoutDashboard } from "lucide-react";
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
-import { LayoutDashboard } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { IconButton } from "@/components/ui/icon-button";
 import { useCartStore } from "@/store/cart-store";
@@ -25,7 +24,14 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const itemCount = useCartStore((s) => s.getItemCount());
   const { user } = useUser();
-  const isAdmin = user?.primaryEmailAddress?.emailAddress === "dvargas.dev@gmail.com";
+  // Admin check via Clerk session - middleware already protects /admin routes
+  // This only controls UI visibility, not actual access
+  const [isAdmin, setIsAdmin] = useState(false);
+  useEffect(() => {
+    if (user) {
+      fetch("/api/auth/check-admin").then(r => r.json()).then(d => setIsAdmin(d.isAdmin)).catch(() => {});
+    }
+  }, [user]);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-100">
