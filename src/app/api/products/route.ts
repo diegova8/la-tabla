@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
+import { createProductSchema } from "@/lib/validations";
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,38 +32,38 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-  const authResult = await requireAdmin();
-  if (authResult instanceof Response) return authResult;
+    const authResult = await requireAdmin();
+    if (authResult instanceof Response) return authResult;
 
     const body = await request.json();
-    const { name, slug, type, description, shortDesc, price, imageUrl, personsMin, personsMax, isConfigurable, isFixed, displayOrder } = body;
-
-    if (!name || !slug || !type || !price) {
-      return NextResponse.json({ error: "Missing required fields: name, slug, type, price" }, { status: 400 });
+    const parsed = createProductSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Datos inválidos", details: parsed.error.flatten().fieldErrors }, { status: 400 });
     }
 
+    const data = parsed.data;
     const [product] = await db.insert(products).values({
-      name,
-      slug,
-      type,
-      description: description || null,
-      shortDesc: shortDesc || null,
-      price,
-      imageUrl: imageUrl || null,
-      personsMin: personsMin || null,
-      personsMax: personsMax || null,
-      isConfigurable: isConfigurable ?? false,
-      isFixed: isFixed ?? false,
-      displayOrder: displayOrder ?? 0,
+      name: data.name,
+      slug: data.slug,
+      type: data.type,
+      description: data.description || null,
+      shortDesc: data.shortDesc || null,
+      price: data.price,
+      imageUrl: data.imageUrl || null,
+      personsMin: data.personsMin ?? null,
+      personsMax: data.personsMax ?? null,
+      isConfigurable: data.isConfigurable,
+      isFixed: data.isFixed,
+      displayOrder: data.displayOrder,
     }).returning();
 
     return NextResponse.json(product, { status: 201 });
   } catch (error: any) {
-    console.error("POST /api/products error:", error);
-    const msg = error?.message || error?.detail || String(error);
+    const msg = error?.message || "";
     if (msg.includes("unique") || msg.includes("duplicate") || msg.includes("23505")) {
       return NextResponse.json({ error: "Ya existe un producto con ese slug" }, { status: 409 });
     }
-    return NextResponse.json({ error: "Internal server error", detail: msg }, { status: 500 });
+    console.error("POST /api/products error:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

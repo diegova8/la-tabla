@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders, orderItems, products } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { updateOrderStatusSchema } from "@/lib/validations";
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const authResult = await requireAdmin();
@@ -42,21 +43,12 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   try {
     const { id } = await params;
     const body = await request.json();
-    const { status, paymentStatus } = body;
-
-    const validStatuses = ["pending", "confirmed", "preparing", "ready", "delivered", "cancelled"];
-    const validPaymentStatuses = ["pending", "verified", "rejected"];
-
-    if (status && !validStatuses.includes(status)) {
-      return NextResponse.json({ error: "Invalid status" }, { status: 400 });
-    }
-    if (paymentStatus && !validPaymentStatuses.includes(paymentStatus)) {
-      return NextResponse.json({ error: "Invalid payment status" }, { status: 400 });
+    const parsed = updateOrderStatusSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });
     }
 
-    const updateData: Record<string, any> = { updatedAt: new Date() };
-    if (status) updateData.status = status;
-    if (paymentStatus) updateData.paymentStatus = paymentStatus;
+    const updateData: Record<string, any> = { ...parsed.data, updatedAt: new Date() };
 
     const [order] = await db
       .update(orders)

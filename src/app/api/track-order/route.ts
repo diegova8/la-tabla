@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 import { db } from "@/db";
 import { orders, orderItems, products, deliverySlots } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for") || "unknown";
+  if (!rateLimit(`track:${ip}`, 10, 60_000)) {
+    return NextResponse.json({ error: "Demasiadas solicitudes" }, { status: 429 });
+  }
+
   const orderNumber = request.nextUrl.searchParams.get("n");
 
   if (!orderNumber) {

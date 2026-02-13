@@ -1,0 +1,29 @@
+// Simple in-memory rate limiter (per serverless instance)
+// For production at scale, use @upstash/ratelimit with Redis
+
+const requests = new Map<string, { count: number; resetAt: number }>();
+
+export function rateLimit(key: string, limit: number, windowMs: number): boolean {
+  const now = Date.now();
+  const entry = requests.get(key);
+
+  if (!entry || now > entry.resetAt) {
+    requests.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+
+  if (entry.count >= limit) {
+    return false;
+  }
+
+  entry.count++;
+  return true;
+}
+
+// Clean up old entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of requests) {
+    if (now > entry.resetAt) requests.delete(key);
+  }
+}, 60_000);

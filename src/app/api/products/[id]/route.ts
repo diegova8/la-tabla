@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { updateProductSchema } from "@/lib/validations";
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -24,11 +25,11 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
     const { id } = await params;
     const body = await request.json();
-    const allowed = ["name", "slug", "type", "description", "shortDesc", "price", "imageUrl", "personsMin", "personsMax", "isConfigurable", "isFixed", "isActive", "displayOrder"] as const;
-    const updates: Record<string, any> = { updatedAt: new Date() };
-    for (const key of allowed) {
-      if (body[key] !== undefined) updates[key] = body[key];
+    const parsed = updateProductSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Datos inválidos", details: parsed.error.flatten().fieldErrors }, { status: 400 });
     }
+    const updates: Record<string, any> = { ...parsed.data, updatedAt: new Date() };
     const [product] = await db
       .update(products)
       .set(updates)
