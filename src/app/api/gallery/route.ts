@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(image, { status: 201 });
   } catch (error) {
     console.error("POST /api/gallery error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    const message = error instanceof Error ? error.message : "Internal server error";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
