@@ -7,6 +7,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Container } from "@/components/ui/container";
 import { IconButton } from "@/components/ui/icon-button";
 import { useCartStore } from "@/store/cart-store";
+import { SearchBar } from "@/components/layout/search-bar";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -50,6 +51,7 @@ export function Navbar() {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
+            <SearchBar />
             <SignedIn>
               <UserButton afterSignOutUrl="/" />
             </SignedIn>

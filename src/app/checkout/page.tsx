@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, getTotal, clearCart } = useCartStore();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [slots, setSlots] = useState<{ id: number; label: string }[]>([]);
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
       const res = await fetch("/api/orders", {
@@ -72,9 +74,13 @@ export default function CheckoutPage() {
         const { orderNumber } = await res.json();
         clearCart();
         router.push(`/checkout/confirmacion?order=${orderNumber}`);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Error al crear el pedido. Intentá de nuevo.");
       }
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
+      setError("Error de conexión. Revisá tu internet e intentá de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -208,6 +214,11 @@ export default function CheckoutPage() {
               {/* Summary */}
               <div>
                 <CartSummary subtotal={getTotal()} showCheckout={false} />
+                {error && (
+                  <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+                    {error}
+                  </div>
+                )}
                 <Button
                   type="submit"
                   variant="gold"
