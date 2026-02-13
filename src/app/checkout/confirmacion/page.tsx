@@ -37,11 +37,11 @@ export default async function ConfirmacionPage({ searchParams }: Props) {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/tablas">
-                <Button variant="gold">Seguir comprando</Button>
+              <Link href={order ? `/pedido?n=${order}` : "/pedido"}>
+                <Button variant="gold">Seguir mi pedido</Button>
               </Link>
-              <Link href="/cuenta/pedidos">
-                <Button variant="secondary">Ver mis pedidos</Button>
+              <Link href="/tablas">
+                <Button variant="secondary">Seguir comprando</Button>
               </Link>
             </div>
           </div>

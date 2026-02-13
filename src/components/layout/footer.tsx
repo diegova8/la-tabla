@@ -12,6 +12,7 @@ const footerLinks = {
   Información: [
     { href: "/sobre-nosotros", label: "Sobre nosotros" },
     { href: "/contacto", label: "Contacto" },
+    { href: "/pedido", label: "Seguí tu pedido" },
     { href: "/#proceso", label: "Cómo funciona" },
     { href: "/#entregas", label: "Zonas de entrega" },
     { href: "/#faq", label: "Preguntas frecuentes" },
