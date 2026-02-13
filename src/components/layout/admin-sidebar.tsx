@@ -8,6 +8,7 @@ import {
   Egg,
   ShoppingCart,
   Calendar,
+  Tag,
   ImageIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/productos", label: "Productos", icon: Package },
+  { href: "/admin/categorias", label: "Categorías", icon: Tag },
   { href: "/admin/ingredientes", label: "Ingredientes", icon: Egg },
   { href: "/admin/pedidos", label: "Pedidos", icon: ShoppingCart },
   { href: "/admin/calendario", label: "Calendario", icon: Calendar },
