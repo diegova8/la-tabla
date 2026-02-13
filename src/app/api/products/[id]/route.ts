@@ -18,16 +18,20 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 }
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  // TODO: Add auth check (admin only)
   try {
   const authResult = await requireAdmin();
   if (authResult instanceof Response) return authResult;
 
     const { id } = await params;
     const body = await request.json();
+    const allowed = ["name", "slug", "type", "description", "shortDesc", "price", "imageUrl", "personsMin", "personsMax", "isConfigurable", "isFixed", "isActive", "displayOrder"] as const;
+    const updates: Record<string, any> = { updatedAt: new Date() };
+    for (const key of allowed) {
+      if (body[key] !== undefined) updates[key] = body[key];
+    }
     const [product] = await db
       .update(products)
-      .set({ ...body, updatedAt: new Date() })
+      .set(updates)
       .where(eq(products.id, parseInt(id)))
       .returning();
 
@@ -42,7 +46,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 }
 
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  // TODO: Add auth check (admin only)
   try {
   const authResult = await requireAdmin();
   if (authResult instanceof Response) return authResult;

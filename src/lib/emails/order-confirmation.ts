@@ -1,3 +1,12 @@
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 interface OrderItem {
   name: string;
   quantity: number;
@@ -25,7 +34,7 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
     .map(
       (item) => `
       <tr>
-        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;">${item.name}${item.notes ? `<br><small style="color:#8b7355;">${item.notes}</small>` : ""}</td>
+        <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;">${escapeHtml(item.name)}${item.notes ? `<br><small style="color:#8b7355;">${escapeHtml(item.notes)}</small>` : ""}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:center;">${item.quantity}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">$${Number(item.unitPrice).toLocaleString("es-CR")}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #f0e6d6;text-align:right;">$${Number(item.totalPrice).toLocaleString("es-CR")}</td>
@@ -55,7 +64,7 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
     <div style="padding:32px 24px;text-align:center;border-bottom:2px solid #f0e6d6;">
       <div style="font-size:48px;margin-bottom:8px;">✅</div>
       <h2 style="margin:0 0 8px;color:#1a1a1a;font-size:22px;">¡Pedido Confirmado!</h2>
-      <p style="margin:0;color:#8b7355;font-size:16px;">Hola <strong>${data.customerName}</strong>, recibimos tu pedido.</p>
+      <p style="margin:0;color:#8b7355;font-size:16px;">Hola <strong>${escapeHtml(data.customerName)}</strong>, recibimos tu pedido.</p>
       <div style="margin-top:16px;padding:12px 24px;background:#faf7f2;border-radius:8px;display:inline-block;">
         <span style="color:#8b7355;font-size:13px;">Número de pedido</span><br>
         <strong style="color:#1a1a1a;font-size:20px;letter-spacing:1px;">${data.orderNumber}</strong>
@@ -104,7 +113,7 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
           <span style="color:#8b7355;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Entrega</span><br>
           <strong style="color:#1a1a1a;">${deliveryLabel}</strong><br>
           <span style="color:#555;">📅 ${data.deliveryDate}</span>
-          ${data.deliveryAddress ? `<br><span style="color:#555;">📍 ${data.deliveryAddress}</span>` : ""}
+          ${data.deliveryAddress ? `<br><span style="color:#555;">📍 ${escapeHtml(data.deliveryAddress)}</span>` : ""}
         </div>
         <div>
           <span style="color:#8b7355;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Método de Pago</span><br>
@@ -113,7 +122,7 @@ export function buildOrderConfirmationEmail(data: OrderEmailData): string {
         ${data.notes ? `
         <div style="margin-top:12px;">
           <span style="color:#8b7355;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Notas</span><br>
-          <span style="color:#555;">${data.notes}</span>
+          <span style="color:#555;">${escapeHtml(data.notes)}</span>
         </div>` : ""}
       </div>
     </div>
@@ -143,7 +152,7 @@ export function buildOrderConfirmationText(data: OrderEmailData): string {
 
   return `¡Pedido Confirmado! 🎉
 
-Hola ${data.customerName}, recibimos tu pedido #${data.orderNumber}.
+Hola ${escapeHtml(data.customerName)}, recibimos tu pedido #${data.orderNumber}.
 
 ${items}
 

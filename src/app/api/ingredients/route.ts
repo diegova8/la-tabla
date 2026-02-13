@@ -36,7 +36,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // TODO: Add auth check (admin only)
   try {
   const authResult = await requireAdmin();
   if (authResult instanceof Response) return authResult;

@@ -2,19 +2,20 @@ import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders, orderItems, orderItemIngredients, products } from "@/db/schema";
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 // Dynamic import to prevent build failures
 
 
 function generateOrderNumber(): string {
   const now = new Date();
   const date = now.toISOString().slice(2, 10).replace(/-/g, "");
-  const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const bytes = new Uint8Array(6);
+  crypto.getRandomValues(bytes);
+  const rand = Array.from(bytes).map(b => b.toString(36)).join("").substring(0, 8).toUpperCase();
   return `LT-${date}-${rand}`;
 }
 
 export async function GET() {
-  // TODO: Add auth check (admin only)
   try {
   const authResult = await requireAdmin();
   if (authResult instanceof Response) return authResult;
@@ -73,52 +74,52 @@ export async function POST(request: NextRequest) {
       notes: notes || null,
     }).returning();
 
-    // Create order items
-    for (const item of items) {
-      const unitPrice = parseFloat(item.unitPrice);
-      const quantity = item.quantity || 1;
+    // Create order items (batch)
+    const orderItemValues = items.map((item: any) => ({
+      orderId: order.id,
+      productId: item.productId,
+      variantId: item.variantId || null,
+      quantity: item.quantity || 1,
+      unitPrice: parseFloat(item.unitPrice).toFixed(2),
+      totalPrice: (parseFloat(item.unitPrice) * (item.quantity || 1)).toFixed(2),
+      notes: item.notes || null,
+    }));
 
-      const [orderItem] = await db.insert(orderItems).values({
-        orderId: order.id,
-        productId: item.productId,
-        variantId: item.variantId || null,
-        quantity,
-        unitPrice: unitPrice.toFixed(2),
-        totalPrice: (unitPrice * quantity).toFixed(2),
-        notes: item.notes || null,
-      }).returning();
+    const createdItems = await db.insert(orderItems).values(orderItemValues).returning();
 
-      // Create selected ingredients if any
+    // Batch insert ingredients
+    const allIngredients: { orderItemId: number; ingredientId: number; categoryId: number }[] = [];
+    items.forEach((item: any, idx: number) => {
       if (item.selectedIngredients?.length) {
         for (const ing of item.selectedIngredients) {
-          await db.insert(orderItemIngredients).values({
-            orderItemId: orderItem.id,
+          allIngredients.push({
+            orderItemId: createdItems[idx].id,
             ingredientId: ing.ingredientId,
             categoryId: ing.categoryId,
           });
         }
       }
+    });
+
+    if (allIngredients.length > 0) {
+      await db.insert(orderItemIngredients).values(allIngredients);
     }
 
     // Send confirmation emails (non-blocking)
-    const emailItems = await Promise.all(
-      items.map(async (item: any) => {
-        let productName = item.name || "Producto";
-        if (item.productId) {
-          const [prod] = await db.select({ name: products.name }).from(products).where(eq(products.id, item.productId)).limit(1);
-          if (prod) productName = prod.name;
-        }
-        return {
-          name: productName,
-          quantity: item.quantity || 1,
-          unitPrice: item.unitPrice,
-          totalPrice: (parseFloat(item.unitPrice) * (item.quantity || 1)).toFixed(2),
-          notes: item.notes,
-        };
-      })
-    );
+    const productIds = items.map((i: any) => i.productId).filter(Boolean);
+    const productNames = productIds.length > 0
+      ? await db.select({ id: products.id, name: products.name }).from(products).where(inArray(products.id, productIds))
+      : [];
+    const nameMap = new Map(productNames.map((p) => [p.id, p.name]));
 
-    console.log("📧 Sending order emails to:", email);
+    const emailItems = items.map((item: any) => ({
+      name: nameMap.get(item.productId) || item.name || "Producto",
+      quantity: item.quantity || 1,
+      unitPrice: item.unitPrice,
+      totalPrice: (parseFloat(item.unitPrice) * (item.quantity || 1)).toFixed(2),
+      notes: item.notes,
+    }));
+
     import("@/lib/emails/send-order-emails").then(({ sendOrderEmails }) => sendOrderEmails({
       orderNumber,
       customerName: name,

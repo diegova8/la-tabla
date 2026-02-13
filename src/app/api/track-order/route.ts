@@ -45,20 +45,20 @@ export async function GET(request: NextRequest) {
       slotLabel = slot?.label || null;
     }
 
+    // Only expose non-sensitive data to public tracking
+    const firstName = order.guestName?.split(" ")[0] || "";
     return NextResponse.json({
       orderNumber: order.orderNumber,
       status: order.status,
-      guestName: order.guestName,
+      guestName: firstName,
       deliveryMethod: order.deliveryMethod,
       deliveryDate: order.deliveryDate,
-      deliveryAddress: order.deliveryAddress,
       deliverySlot: slotLabel,
       subtotal: order.subtotal,
       deliveryCost: order.deliveryCost,
       total: order.total,
       paymentMethod: order.paymentMethod,
       paymentStatus: order.paymentStatus,
-      notes: order.notes,
       createdAt: order.createdAt,
       items,
     });
