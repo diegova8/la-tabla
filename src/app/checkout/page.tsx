@@ -20,11 +20,17 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [slots, setSlots] = useState<{ id: number; label: string }[]>([]);
+  const [blockedDates, setBlockedDates] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetch("/api/delivery-slots")
       .then((r) => r.json())
       .then((data) => setSlots(data))
+      .catch(console.error);
+
+    fetch("/api/blocked-dates")
+      .then((r) => r.json())
+      .then((data: { date: string }[]) => setBlockedDates(new Set(data.map((d) => d.date))))
       .catch(console.error);
   }, []);
 
@@ -153,9 +159,20 @@ export default function CheckoutPage() {
                       required
                       min={minDateStr}
                       value={form.deliveryDate}
-                      onChange={(e) => update("deliveryDate", e.target.value)}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        if (blockedDates.has(val)) {
+                          setError("Esta fecha no está disponible para entregas. Elegí otra fecha.");
+                          return;
+                        }
+                        setError("");
+                        update("deliveryDate", val);
+                      }}
                       hint="Mínimo 2 días de anticipación"
                     />
+                    {blockedDates.has(form.deliveryDate) && (
+                      <p className="text-sm text-red-600 sm:col-span-2">⚠️ Esta fecha está bloqueada</p>
+                    )}
                     <Select
                       label="Franja horaria"
                       placeholder="Seleccioná una franja"

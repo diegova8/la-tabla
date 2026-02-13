@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { blockedDates } from "@/db/schema";
@@ -10,6 +11,9 @@ interface Props {
 export async function DELETE(request: NextRequest, { params }: Props) {
   const { id } = await params;
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const [deleted] = await db.delete(blockedDates).where(eq(blockedDates.id, parseInt(id))).returning();
     if (!deleted) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
     return NextResponse.json({ success: true });

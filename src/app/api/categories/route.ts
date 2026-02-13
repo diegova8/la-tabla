@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { categories } from "@/db/schema";
@@ -22,6 +23,9 @@ function slugify(text: string): string {
 
 export async function POST(request: NextRequest) {
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const body = await request.json();
     const { name, displayOrder } = body;
 

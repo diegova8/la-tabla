@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { ingredients } from "@/db/schema";
@@ -18,6 +19,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const { id } = await params;
     const body = await request.json();
     const [ingredient] = await db
@@ -37,6 +41,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const { id } = await params;
     const [ingredient] = await db
       .update(ingredients)

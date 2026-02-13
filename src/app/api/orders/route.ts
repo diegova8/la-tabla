@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { orders, orderItems, orderItemIngredients, products } from "@/db/schema";
@@ -15,6 +16,9 @@ function generateOrderNumber(): string {
 export async function GET() {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const result = await db
       .select()
       .from(orders)

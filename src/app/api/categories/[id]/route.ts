@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { categories } from "@/db/schema";
@@ -14,6 +15,9 @@ function slugify(text: string): string {
 export async function PUT(request: NextRequest, { params }: Props) {
   const { id } = await params;
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const body = await request.json();
     const { name, displayOrder } = body;
 
@@ -51,6 +55,9 @@ export async function PUT(request: NextRequest, { params }: Props) {
 export async function DELETE(request: NextRequest, { params }: Props) {
   const { id } = await params;
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const [deleted] = await db
       .delete(categories)
       .where(eq(categories.id, parseInt(id)))

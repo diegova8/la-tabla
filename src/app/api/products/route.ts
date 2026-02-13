@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { products } from "@/db/schema";
@@ -31,6 +32,9 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const body = await request.json();
     const { name, slug, type, description, shortDesc, price, imageUrl, personsMin, personsMax, isConfigurable, isFixed, displayOrder } = body;
 

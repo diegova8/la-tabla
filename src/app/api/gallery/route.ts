@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { productImages, products } from "@/db/schema";
@@ -28,6 +29,9 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
     const productId = formData.get("productId") as string;

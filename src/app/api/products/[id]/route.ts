@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { db } from "@/db";
@@ -19,6 +20,9 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const { id } = await params;
     const body = await request.json();
     const [product] = await db
@@ -40,6 +44,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 export async function DELETE(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   // TODO: Add auth check (admin only)
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const { id } = await params;
     const [product] = await db
       .update(products)

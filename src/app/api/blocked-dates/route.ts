@@ -1,3 +1,4 @@
+import { requireAdmin } from "@/lib/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { blockedDates } from "@/db/schema";
@@ -15,6 +16,9 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+  const authResult = await requireAdmin();
+  if (authResult instanceof Response) return authResult;
+
     const { date, reason } = await request.json();
     if (!date) return NextResponse.json({ error: "Fecha requerida" }, { status: 400 });
 
