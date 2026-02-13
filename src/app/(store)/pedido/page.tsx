@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
@@ -52,6 +52,14 @@ interface OrderData {
 }
 
 export default function PedidoTrackingPage() {
+  return (
+    <Suspense>
+      <PedidoTrackingContent />
+    </Suspense>
+  );
+}
+
+function PedidoTrackingContent() {
   const searchParams = useSearchParams();
   const [orderNumber, setOrderNumber] = useState("");
   const [order, setOrder] = useState<OrderData | null>(null);
