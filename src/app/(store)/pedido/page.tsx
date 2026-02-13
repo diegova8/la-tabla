@@ -10,8 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Price } from "@/components/ui/price";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
 import { Search, Package, Truck, CheckCircle, Clock, ChefHat, XCircle } from "lucide-react";
 
 const statusConfig: Record<string, { label: string; color: string; icon: any; step: number }> = {
@@ -103,9 +101,7 @@ function PedidoTrackingContent() {
   const config = order ? statusConfig[order.status] || statusConfig.pending : null;
 
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen py-16">
+    <section className="py-16">
         <Container>
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-10">
@@ -260,8 +256,6 @@ function PedidoTrackingContent() {
             )}
           </div>
         </Container>
-      </main>
-      <Footer />
-    </>
+    </section>
   );
 }
