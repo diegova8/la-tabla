@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/talleres", label: "Talleres" },
   { href: "/sobre-nosotros", label: "Nosotros" },
   { href: "/contacto", label: "Contacto" },
+  { href: "/pedido", label: "Mi Pedido" },
 ];
 
 export function Navbar() {
