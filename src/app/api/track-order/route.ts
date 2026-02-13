@@ -3,12 +3,12 @@ import { db } from "@/db";
 import { orders, orderItems, products, deliverySlots } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-interface Props {
-  params: Promise<{ orderNumber: string }>;
-}
+export async function GET(request: NextRequest) {
+  const orderNumber = request.nextUrl.searchParams.get("n");
 
-export async function GET(request: NextRequest, { params }: Props) {
-  const { orderNumber } = await params;
+  if (!orderNumber) {
+    return NextResponse.json({ error: "Número de pedido requerido" }, { status: 400 });
+  }
 
   try {
     const [order] = await db
@@ -21,7 +21,6 @@ export async function GET(request: NextRequest, { params }: Props) {
       return NextResponse.json({ error: "Pedido no encontrado" }, { status: 404 });
     }
 
-    // Get order items with product names
     const items = await db
       .select({
         id: orderItems.id,
@@ -36,7 +35,6 @@ export async function GET(request: NextRequest, { params }: Props) {
       .innerJoin(products, eq(orderItems.productId, products.id))
       .where(eq(orderItems.orderId, order.id));
 
-    // Get delivery slot label
     let slotLabel = null;
     if (order.deliverySlotId) {
       const [slot] = await db
@@ -65,7 +63,7 @@ export async function GET(request: NextRequest, { params }: Props) {
       items,
     });
   } catch (error) {
-    console.error("GET /api/orders/[orderNumber] error:", error);
+    console.error("GET /api/track-order error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

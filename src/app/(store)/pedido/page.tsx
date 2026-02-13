@@ -72,7 +72,7 @@ export default function PedidoTrackingPage() {
     setOrder(null);
 
     try {
-      const res = await fetch(`/api/orders/${encodeURIComponent(num.trim())}`);
+      const res = await fetch(`/api/track-order?n=${encodeURIComponent(num.trim())}`);
       if (!res.ok) {
         const data = await res.json();
         setError(data.error || "Pedido no encontrado");
