@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ShoppingBag, Menu, X } from "lucide-react";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import { LayoutDashboard } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { IconButton } from "@/components/ui/icon-button";
 import { useCartStore } from "@/store/cart-store";
@@ -23,6 +24,8 @@ const navLinks = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const itemCount = useCartStore((s) => s.getItemCount());
+  const { user } = useUser();
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === "dvargas.dev@gmail.com";
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-100">
@@ -54,6 +57,13 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <SearchBar />
             <SignedIn>
+              {isAdmin && (
+                <Link href="/admin" aria-label="Admin Dashboard">
+                  <IconButton label="Admin" size="sm">
+                    <LayoutDashboard className="h-5 w-5" />
+                  </IconButton>
+                </Link>
+              )}
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
             <SignedOut>
