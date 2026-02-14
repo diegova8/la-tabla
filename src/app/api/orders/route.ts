@@ -4,8 +4,6 @@ import { db } from "@/db";
 import { orders, orderItems, orderItemIngredients, products } from "@/db/schema";
 import { desc, eq, inArray } from "drizzle-orm";
 import { createOrderSchema } from "@/lib/validations";
-import { rateLimit } from "@/lib/rate-limit";
-// Dynamic import to prevent build failures
 
 
 function generateOrderNumber(): string {
@@ -36,11 +34,6 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for") || "unknown";
-  if (!rateLimit(`order:${ip}`, 5, 60_000)) {
-    return NextResponse.json({ error: "Demasiadas solicitudes. Intentá en un minuto." }, { status: 429 });
-  }
-
   try {
     const body = await request.json();
     const parsed = createOrderSchema.safeParse(body);

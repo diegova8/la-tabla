@@ -1,23 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { rateLimit } from "@/lib/rate-limit";
 import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq, ilike, or, and } from "drizzle-orm";
 
-export async function GET(request: NextRequest) {
-  const ip = request.headers.get("x-forwarded-for") || "unknown";
-  if (!rateLimit(`search:${ip}`, 20, 60_000)) {
-    return NextResponse.json({ error: "Demasiadas solicitudes" }, { status: 429 });
-  }
+// Escape special LIKE/SQL pattern characters to prevent pattern injection
+function escapeLike(str: string): string {
+  return str.replace(/[%_\\]/g, (c) => `\\${c}`);
+}
 
+export async function GET(request: NextRequest) {
   const q = request.nextUrl.searchParams.get("q")?.trim();
 
-  if (!q || q.length < 2) {
+  if (!q || q.length < 2 || q.length > 100) {
     return NextResponse.json([]);
   }
 
   try {
-    const pattern = `%${q}%`;
+    const pattern = `%${escapeLike(q)}%`;
     const results = await db
       .select()
       .from(products)
