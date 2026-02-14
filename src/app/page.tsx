@@ -140,7 +140,9 @@ export default async function Home() {
             name: "La Tabla",
             description:
               "Tablas de charcutería y quesos artesanales en Costa Rica. Chef privado, eventos y talleres.",
-            image: "/images/detail/jamon-queso-closeup.jpg",
+            image: "https://la-tabla.vercel.app/images/detail/jamon-queso-closeup.jpg",
+            url: "https://la-tabla.vercel.app",
+            telephone: "",
             address: {
               "@type": "PostalAddress",
               addressLocality: "San José",

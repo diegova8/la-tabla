@@ -26,12 +26,12 @@ export default function CheckoutPage() {
     fetch("/api/delivery-slots")
       .then((r) => r.json())
       .then((data) => setSlots(data))
-      .catch(console.error);
+      .catch(() => {});
 
     fetch("/api/blocked-dates")
       .then((r) => r.json())
       .then((data: { date: string }[]) => setBlockedDates(new Set(data.map((d) => d.date))))
-      .catch(console.error);
+      .catch(() => {});
   }, []);
 
   // Calculate min date (today + 2 days)
@@ -84,8 +84,7 @@ export default function CheckoutPage() {
         const data = await res.json().catch(() => ({}));
         setError(data.error || "Error al crear el pedido. Intentá de nuevo.");
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       setError("Error de conexión. Revisá tu internet e intentá de nuevo.");
     } finally {
       setLoading(false);

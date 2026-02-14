@@ -64,8 +64,8 @@ export function OrderDetail({ order: initialOrder }: { order: Order }) {
       const data = await res.json();
       setItems(data.items || []);
       setExpanded(true);
-    } catch (err) {
-      console.error(err);
+    } catch {
+      // silently fail — admin can retry
     }
   };
 
@@ -82,8 +82,8 @@ export function OrderDetail({ order: initialOrder }: { order: Order }) {
         setOrder((prev) => ({ ...prev, status: data.status }));
         router.refresh();
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
+      // silently fail — admin can retry
     } finally {
       setLoading(false);
     }
