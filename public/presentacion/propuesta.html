@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Tabla — Propuesta de Plataforma Digital</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#1a1a1a;--cream:#f5f0e8;--cream-light:#faf8f3;--gold:#c9a84c;--gold-dark:#a8893d;--text:#333;--text-light:#666}
+
+body{font-family:'Lato',sans-serif;color:var(--text);background:white;font-size:11pt;line-height:1.6}
+
+.page{width:210mm;min-height:297mm;margin:0 auto;padding:20mm 25mm;position:relative;page-break-after:always;background:white}
+.page:last-child{page-break-after:auto}
+
+h1{font-family:'Playfair Display',Georgia,serif;font-size:28pt;font-weight:900;color:var(--black);line-height:1.2}
+h2{font-family:'Playfair Display',Georgia,serif;font-size:18pt;font-weight:700;color:var(--black);margin-bottom:8mm;padding-bottom:3mm;border-bottom:2px solid var(--gold)}
+h3{font-family:'Playfair Display',Georgia,serif;font-size:12pt;font-weight:700;color:var(--gold-dark);margin:5mm 0 2mm}
+p{margin-bottom:3mm;color:var(--text)}
+strong{color:var(--black)}
+
+.gold{color:var(--gold)}
+.gold-dark{color:var(--gold-dark)}
+
+/* Cover page */
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(180deg,var(--cream-light) 0%,white 100%)}
+.cover-logo{font-family:'Playfair Display',serif;font-size:42pt;font-weight:900;color:var(--black);margin-bottom:2mm}
+.cover-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:13pt;color:var(--gold);letter-spacing:2px;margin-bottom:15mm}
+.cover-divider{width:60mm;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:8mm auto}
+.cover-title{font-family:'Playfair Display',serif;font-size:16pt;font-weight:400;color:var(--text);margin-top:5mm}
+.cover-date{font-size:10pt;color:var(--text-light);margin-top:15mm}
+
+/* Content */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin:5mm 0}
+.feature-item{padding:4mm;border:1px solid #e8e3d8;border-radius:3mm;background:var(--cream-light)}
+.feature-item .icon{font-size:16pt;margin-bottom:2mm}
+.feature-item h3{margin:0 0 1mm;font-size:10.5pt}
+.feature-item p{font-size:9pt;margin:0;color:var(--text-light)}
+
+.list-item{padding:3mm 0;border-bottom:1px solid #eee;display:flex;gap:3mm;align-items:flex-start}
+.list-item:last-child{border-bottom:none}
+.list-item .icon{font-size:13pt;flex-shrink:0;margin-top:1mm}
+.list-item div{flex:1}
+.list-item h3{margin:0 0 1mm;font-size:10.5pt}
+.list-item p{margin:0;font-size:9.5pt;color:var(--text-light)}
+
+.highlight-box{background:var(--cream-light);border-left:3px solid var(--gold);padding:5mm;margin:5mm 0;border-radius:0 2mm 2mm 0}
+.highlight-box p{margin:0;font-size:10pt}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin:5mm 0}
+.col{padding:5mm;background:var(--cream-light);border-radius:3mm;border:1px solid #e8e3d8}
+.col h3{text-align:center;font-size:12pt;margin-bottom:3mm}
+.col ul{list-style:none;padding:0}
+.col ul li{padding:1.5mm 0;font-size:9.5pt;color:var(--text)}
+.col ul li::before{content:'✓ ';color:var(--gold)}
+
+/* Footer */
+.page-footer{position:absolute;bottom:15mm;left:25mm;right:25mm;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #eee;padding-top:3mm;font-size:8pt;color:#999}
+
+/* Contact page */
+.contact-card{text-align:center;padding:10mm;background:var(--cream-light);border-radius:4mm;border:1px solid #e8e3d8;margin:10mm auto;max-width:120mm}
+
+@media print{
+  body{background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:auto;margin:0;padding:18mm 22mm;box-shadow:none}
+  @page{size:A4;margin:0}
+}
+@media screen{
+  .page{box-shadow:0 2px 20px rgba(0,0,0,.08);margin:10mm auto;border-radius:2px}
+  body{background:#e8e8e8;padding:5mm 0}
+}
+</style>
+</head>
+<body>
+
+<!-- Page 1: Cover -->
+<div class="page cover">
+  <div style="flex:1"></div>
+  <div>
+    <div style="font-size:36pt;margin-bottom:5mm">🧀</div>
+    <div class="cover-logo">La Tabla</div>
+    <div class="cover-tagline">Charcutería &amp; Quesos Artesanales</div>
+    <div class="cover-divider"></div>
+    <div class="cover-title">Propuesta de Plataforma Digital</div>
+    <div class="cover-divider"></div>
+    <p style="color:var(--text-light);font-size:10pt;margin-top:10mm">Preparado para <strong>Chef Stewart Heigold</strong></p>
+    <p class="cover-date">Febrero 2026</p>
+  </div>
+  <div style="flex:1"></div>
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- Page 2: Resumen Ejecutivo -->
+<div class="page">
+  <h2>Resumen Ejecutivo</h2>
+  
+  <p style="font-size:11pt;margin-bottom:6mm"><strong>La Tabla</strong> es una marca de charcutería artesanal con un producto excepcional y una creciente base de clientes en Costa Rica. Esta propuesta presenta una <strong>plataforma digital completa</strong> diseñada para profesionalizar la operación, aumentar las ventas y escalar el negocio.</p>
+
+  <div class="highlight-box">
+    <p><strong style="color:var(--gold-dark)">¿Qué se construyó?</strong> Una plataforma e-commerce completa con catálogo de productos, personalización de tablas, sistema de pedidos, panel de administración y herramientas de gestión — todo bajo la marca La Tabla.</p>
+  </div>
+
+  <h3>El Desafío Actual</h3>
+  <p>La gestión de pedidos a través de WhatsApp e Instagram presenta limitaciones: mensajes que se pierden, falta de catálogo profesional, proceso manual para cada pedido y dificultad para escalar conforme crece la demanda.</p>
+
+  <h3>La Solución</h3>
+  <p>Una plataforma profesional accesible desde <strong>la-tabla.vercel.app</strong> que permite a los clientes explorar el catálogo, personalizar sus tablas, realizar pedidos y dar seguimiento — todo en un solo lugar, disponible 24/7.</p>
+
+  <h3>Beneficios Clave</h3>
+  <div class="feature-grid">
+    <div class="feature-item"><div class="icon">💎</div><h3>Imagen Profesional</h3><p>Presencia digital de primer nivel que refleja la calidad del producto</p></div>
+    <div class="feature-item"><div class="icon">⏰</div><h3>Disponible 24/7</h3><p>Los clientes pueden pedir en cualquier momento, no solo en horario de atención</p></div>
+    <div class="feature-item"><div class="icon">📈</div><h3>Escalabilidad</h3><p>Sistema preparado para crecer sin aumentar la carga operativa</p></div>
+    <div class="feature-item"><div class="icon">🔄</div><h3>Automatización</h3><p>Confirmaciones, notificaciones y seguimiento sin esfuerzo manual</p></div>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- Page 3: Funcionalidades -->
+<div class="page">
+  <h2>Funcionalidades de la Plataforma</h2>
+
+  <div class="list-item">
+    <div class="icon">🧀</div>
+    <div><h3>Catálogo de Productos</h3><p>Presentación profesional de tablas de charcutería, especialidades, servicios de catering y talleres. Cada producto con fotos, descripciones detalladas, precios e información de ingredientes.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">🎨</div>
+    <div><h3>Tabla Builder — Personalización</h3><p>Herramienta interactiva que permite al cliente crear su tabla ideal seleccionando quesos, embutidos, acompañamientos y extras. Experiencia única que diferencia a La Tabla de la competencia.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">🛒</div>
+    <div><h3>Carrito de Compras y Checkout</h3><p>Proceso de compra fluido: el cliente agrega productos, revisa su pedido, ingresa datos de entrega y confirma. Sin fricciones, sin necesidad de WhatsApp.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">📦</div>
+    <div><h3>Tracking de Pedidos</h3><p>El cliente puede seguir el estado de su pedido en tiempo real: confirmado, en preparación, en camino, entregado. Transparencia total sin necesidad de preguntar.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">✉️</div>
+    <div><h3>Emails Automáticos</h3><p>Confirmación de pedido, actualizaciones de estado y notificaciones enviadas automáticamente al cliente y al administrador.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">📱</div>
+    <div><h3>Diseño Responsive</h3><p>Optimizado para celular, tablet y computadora. La mayoría de clientes acceden desde el celular — la experiencia es perfecta en cualquier dispositivo.</p></div>
+  </div>
+  <div class="list-item">
+    <div class="icon">🔍</div>
+    <div><h3>SEO Optimizado</h3><p>Estructura optimizada para aparecer en Google cuando buscan "charcutería Costa Rica", "tablas de quesos" y términos relacionados. Más visibilidad = más clientes.</p></div>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- Page 4: Panel de Administración -->
+<div class="page">
+  <h2>Panel de Administración</h2>
+  <p style="margin-bottom:6mm">Un centro de control completo para gestionar todos los aspectos del negocio desde un solo lugar, accesible desde cualquier dispositivo con conexión a internet.</p>
+
+  <div class="feature-grid">
+    <div class="feature-item">
+      <div class="icon">📊</div>
+      <h3>Dashboard</h3>
+      <p>Vista general con estadísticas de ventas, ingresos, pedidos del día y métricas clave del negocio</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">📝</div>
+      <h3>Gestión de Productos</h3>
+      <p>Crear, editar, activar o pausar productos. Control total del catálogo con fotos y precios</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🧅</div>
+      <h3>Gestión de Ingredientes</h3>
+      <p>Administrar los ingredientes disponibles para el Tabla Builder personalizable</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">📋</div>
+      <h3>Gestión de Pedidos</h3>
+      <p>Ver, actualizar estados, confirmar y gestionar todos los pedidos con notificaciones automáticas</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">📅</div>
+      <h3>Calendario</h3>
+      <p>Visualizar entregas programadas, eventos y talleres en un calendario intuitivo</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">🖼️</div>
+      <h3>Galería</h3>
+      <p>Gestionar las fotos del sitio web — subir, organizar y destacar las mejores imágenes</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">👥</div>
+      <h3>Clientes</h3>
+      <p>Base de datos de clientes con historial de pedidos y datos de contacto</p>
+    </div>
+    <div class="feature-item">
+      <div class="icon">⚙️</div>
+      <h3>Configuración</h3>
+      <p>Ajustes generales del sitio, horarios, zonas de entrega y preferencias</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong style="color:var(--gold-dark)">Fácil de usar:</strong> El panel está diseñado para ser intuitivo. No se necesita experiencia técnica — si podés usar Instagram, podés usar el panel.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- Page 5: Tecnología y Seguridad -->
+<div class="page">
+  <h2>Tecnología y Seguridad</h2>
+  <p style="margin-bottom:6mm">La plataforma está construida con tecnología moderna y segura, garantizando rendimiento, confiabilidad y protección de datos.</p>
+
+  <h3>🏗️ Arquitectura</h3>
+  <p>La plataforma utiliza tecnología de última generación que garantiza tiempos de carga rápidos, experiencia fluida y capacidad de escalar conforme el negocio crece.</p>
+
+  <div class="feature-grid" style="margin:5mm 0">
+    <div class="feature-item">
+      <h3>⚡ Rendimiento</h3>
+      <p>Carga en menos de 2 segundos. Optimizado para conexiones móviles. Imágenes comprimidas automáticamente.</p>
+    </div>
+    <div class="feature-item">
+      <h3>🔒 Seguridad</h3>
+      <p>Conexión cifrada (HTTPS), protección contra ataques comunes, datos de clientes almacenados de forma segura.</p>
+    </div>
+    <div class="feature-item">
+      <h3>☁️ Hosting</h3>
+      <p>Alojamiento en la nube con disponibilidad del 99.9%. Respaldos automáticos. Sin preocupaciones por servidores.</p>
+    </div>
+    <div class="feature-item">
+      <h3>📱 Multi-plataforma</h3>
+      <p>Funciona perfectamente en todos los navegadores y dispositivos: Chrome, Safari, Firefox, celular, tablet, PC.</p>
+    </div>
+  </div>
+
+  <h3>🛡️ Protección de Datos</h3>
+  <p>Los datos de los clientes (nombres, direcciones, pedidos) se almacenan de forma segura con acceso restringido. Solo el administrador autorizado puede ver información sensible.</p>
+
+  <h3>🔄 Mantenimiento y Actualizaciones</h3>
+  <p>La plataforma recibe actualizaciones regulares de seguridad y funcionalidades. Monitoreo constante para asegurar disponibilidad y rendimiento óptimo.</p>
+
+  <div class="highlight-box">
+    <p><strong style="color:var(--gold-dark)">Sin preocupaciones técnicas:</strong> Todo el aspecto técnico es manejado por el equipo de desarrollo. El chef se enfoca en su producto, nosotros nos encargamos de la tecnología.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- Page 6: Modelo de Negocio -->
+<div class="page">
+  <h2>Modelo de Negocio</h2>
+  <p style="margin-bottom:6mm">Un modelo diseñado para que ambas partes ganen. Sin riesgos, sin inversión inicial, con incentivos alineados.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <h3>👨‍🍳 Para el Chef</h3>
+      <ul>
+        <li>Costo inicial: <strong>$0</strong></li>
+        <li>Mensualidad: <strong>$0</strong></li>
+        <li>Plataforma completa lista para usar</li>
+        <li>Panel de administración incluido</li>
+        <li>Soporte técnico continuo</li>
+        <li>Actualizaciones y mejoras</li>
+        <li>Capacitación de uso</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>🤝 El Acuerdo</h3>
+      <ul>
+        <li>Comisión por venta realizada</li>
+        <li>Solo se paga cuando se vende</li>
+        <li>Incentivos 100% alineados</li>
+        <li>A más ventas, ambos ganamos</li>
+        <li>Sin contratos de permanencia</li>
+        <li>Relación basada en resultados</li>
+        <li>Transparencia total</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>¿Qué está incluido?</h3>
+  <div class="feature-grid">
+    <div class="feature-item"><h3>🛠️ Desarrollo</h3><p>Toda la plataforma ya construida y funcionando</p></div>
+    <div class="feature-item"><h3>🔧 Mantenimiento</h3><p>Actualizaciones, correcciones y monitoreo continuo</p></div>
+    <div class="feature-item"><h3>📞 Soporte</h3><p>Asistencia técnica cuando sea necesario</p></div>
+    <div class="feature-item"><h3>🚀 Mejoras</h3><p>Nuevas funcionalidades y optimizaciones</p></div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong style="color:var(--gold-dark)">¿Por qué funciona?</strong> Cuando el negocio crece, ambos crecemos. Este modelo elimina el riesgo para el chef y crea un incentivo real para que la plataforma siempre esté optimizada y generando ventas.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- Page 7: Próximos Pasos -->
+<div class="page">
+  <h2>Próximos Pasos</h2>
+  <p style="margin-bottom:6mm">La plataforma está lista para operar hoy. Estos son los próximos hitos para llevar La Tabla al siguiente nivel.</p>
+
+  <h3>Fase 1 — Inmediato</h3>
+  <div class="list-item"><div class="icon">✅</div><div><h3>Lanzamiento</h3><p>La plataforma está construida y funcionando. Revisar productos, ajustar precios y detalles, y empezar a compartir con clientes.</p></div></div>
+  <div class="list-item"><div class="icon">📸</div><div><h3>Contenido</h3><p>Subir fotos profesionales de los productos. La calidad de las fotos impacta directamente en las ventas.</p></div></div>
+  <div class="list-item"><div class="icon">📣</div><div><h3>Difusión</h3><p>Compartir el link en Instagram, TikTok y WhatsApp. Agregar el link a la bio de redes sociales.</p></div></div>
+
+  <h3>Fase 2 — Corto Plazo</h3>
+  <div class="list-item"><div class="icon">🌐</div><div><h3>Dominio Personalizado</h3><p>Registrar un dominio como <strong>latabla.cr</strong> para una URL profesional y memorable.</p></div></div>
+  <div class="list-item"><div class="icon">💳</div><div><h3>Pasarela de Pago</h3><p>Integrar pagos online: tarjetas de crédito/débito y SINPE Móvil directamente en la plataforma.</p></div></div>
+  <div class="list-item"><div class="icon">📊</div><div><h3>Analytics</h3><p>Implementar seguimiento de visitas, conversiones y comportamiento de usuarios para tomar decisiones informadas.</p></div></div>
+
+  <h3>Fase 3 — Mediano Plazo</h3>
+  <div class="list-item"><div class="icon">⭐</div><div><h3>Reseñas de Clientes</h3><p>Sistema de calificaciones y testimonios que construye confianza y atrae nuevos clientes.</p></div></div>
+  <div class="list-item"><div class="icon">🎁</div><div><h3>Programa de Lealtad</h3><p>Recompensar clientes frecuentes con puntos, descuentos o beneficios exclusivos.</p></div></div>
+  <div class="list-item"><div class="icon">📲</div><div><h3>Integración Redes Sociales</h3><p>Catálogo sincronizado con Instagram Shopping y Facebook para ventas directas desde redes.</p></div></div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>7</span>
+  </div>
+</div>
+
+<!-- Page 8: Contacto -->
+<div class="page" style="display:flex;flex-direction:column;justify-content:center;align-items:center">
+  <div style="text-align:center">
+    <div style="font-size:30pt;margin-bottom:5mm">🧀</div>
+    <h1 style="font-size:30pt;margin-bottom:2mm">La Tabla</h1>
+    <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:12pt;letter-spacing:2px">Charcutería &amp; Quesos Artesanales</p>
+    <div class="cover-divider"></div>
+  </div>
+
+  <div class="contact-card" style="margin-top:10mm">
+    <h3 style="font-size:14pt;margin-bottom:5mm;color:var(--black)">Contacto</h3>
+    <p style="font-size:12pt;margin-bottom:2mm"><strong>Diego</strong></p>
+    <p style="color:var(--text-light)">Desarrollo &amp; Gestión de Plataforma</p>
+    <div class="cover-divider" style="margin:5mm auto"></div>
+    <p style="font-size:10pt;color:var(--text-light);margin-top:5mm">Plataforma: <strong>la-tabla.vercel.app</strong></p>
+    <p style="font-size:10pt;color:var(--text-light)">Instagram: <strong>@latabla.cr</strong></p>
+    <p style="font-size:10pt;color:var(--text-light)">TikTok: <strong>@latablacr</strong></p>
+  </div>
+
+  <div style="text-align:center;margin-top:10mm">
+    <p style="color:var(--text-light);font-size:10pt">Gracias por tu confianza, Chef Stewart 🙏</p>
+    <p style="color:#ccc;font-size:8pt;margin-top:5mm">Febrero 2026</p>
+  </div>
+
+  <div class="page-footer">
+    <span>La Tabla — Propuesta Digital</span>
+    <span>8</span>
+  </div>
+</div>
+
+</body>
+</html>

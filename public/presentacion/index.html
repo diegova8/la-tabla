@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Tabla — Tu Plataforma Digital</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#0a0a0a;--cream:#f5f0e8;--gold:#c9a84c;--gold-light:#e2cc8a;--dark-bg:#111111;--card-bg:#1a1a1a}
+html,body{height:100%;overflow:hidden;background:var(--black);color:var(--cream);font-family:'Lato',sans-serif}
+
+.deck{position:relative;width:100%;height:100%}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:4rem 2rem;opacity:0;transform:translateX(60px);transition:opacity .6s ease,transform .6s ease;pointer-events:none;overflow-y:auto}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:all}
+.slide.exit-left{opacity:0;transform:translateX(-60px)}
+
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif}
+h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.15}
+h2{font-size:clamp(1.6rem,3.5vw,2.8rem);font-weight:700;margin-bottom:1.5rem}
+h3{font-size:1.3rem;font-weight:700;margin-bottom:.5rem;color:var(--gold)}
+p,.desc{font-size:1.05rem;line-height:1.7;max-width:700px;text-align:center;color:#ccc}
+
+.gold{color:var(--gold)}
+.tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--gold-light);margin-top:.8rem;letter-spacing:2px}
+.divider{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.5rem auto}
+
+/* Grid cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;max-width:900px;width:100%;margin-top:1.5rem}
+.card{background:var(--card-bg);border:1px solid #2a2a2a;border-radius:12px;padding:1.4rem;text-align:left;transition:border-color .3s}
+.card:hover{border-color:var(--gold)}
+.card .icon{font-size:1.8rem;margin-bottom:.6rem}
+.card p{font-size:.92rem;color:#aaa;text-align:left}
+
+/* Feature list */
+.features{list-style:none;max-width:700px;width:100%;margin-top:1rem}
+.features li{padding:.7rem 0;border-bottom:1px solid #222;display:flex;align-items:center;gap:.8rem;font-size:1rem}
+.features li .icon{font-size:1.3rem;flex-shrink:0}
+
+/* CTA button */
+.btn{display:inline-block;margin-top:2rem;padding:.9rem 2.4rem;background:linear-gradient(135deg,var(--gold),#b8923e);color:var(--black);font-weight:700;font-size:1.05rem;border-radius:8px;text-decoration:none;transition:transform .2s,box-shadow .2s;cursor:pointer;border:none}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.35)}
+
+/* Progress bar */
+.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .4s ease;z-index:100}
+
+/* Nav dots */
+.dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.6rem;z-index:100}
+.dot{width:10px;height:10px;border-radius:50%;background:#333;border:1px solid #555;cursor:pointer;transition:all .3s}
+.dot.active{background:var(--gold);border-color:var(--gold);transform:scale(1.3)}
+
+/* Nav arrows */
+.nav-arrows{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:1rem;z-index:100}
+.nav-btn{width:48px;height:48px;border-radius:50%;border:1px solid #333;background:rgba(20,20,20,.8);color:var(--cream);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;backdrop-filter:blur(8px)}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Slide counter */
+.counter{position:fixed;bottom:2.2rem;right:1.5rem;font-size:.85rem;color:#555;z-index:100;font-family:'Lato',sans-serif}
+
+/* Big URL */
+.big-url{font-size:clamp(1.2rem,3vw,2rem);font-weight:700;color:var(--gold);word-break:break-all;margin:1.5rem 0;letter-spacing:1px}
+.qr-box{background:var(--cream);color:var(--black);padding:1.5rem 2rem;border-radius:12px;text-align:center;margin-top:1rem;font-family:monospace;font-size:.85rem;line-height:1.1}
+
+/* Win-win */
+.win{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;max-width:800px}
+.win-card{flex:1;min-width:250px;background:var(--card-bg);border:1px solid #2a2a2a;border-radius:12px;padding:2rem;text-align:center}
+.win-card h3{font-size:1.1rem}
+.win-card p{text-align:center;font-size:.95rem;color:#aaa}
+
+/* Mockup */
+.mockup{max-width:700px;width:100%;margin:1.5rem auto;border-radius:12px;border:1px solid #2a2a2a;background:var(--card-bg);padding:1rem;position:relative;overflow:hidden}
+.mockup-bar{display:flex;gap:6px;margin-bottom:.8rem}
+.mockup-bar span{width:10px;height:10px;border-radius:50%;background:#333}
+.mockup-bar span:first-child{background:#e74c3c}
+.mockup-bar span:nth-child(2){background:#f1c40f}
+.mockup-bar span:nth-child(3){background:#2ecc71}
+.mockup-body{background:linear-gradient(135deg,#1a1510,#0f0f0f);border-radius:8px;padding:2rem;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mockup-body .logo-text{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--cream)}
+.mockup-body .mock-tag{font-size:.85rem;color:var(--gold);margin-top:.3rem;font-style:italic}
+
+@media(max-width:600px){
+  .slide{padding:2rem 1.2rem}
+  .grid{grid-template-columns:1fr}
+  .dots{right:.7rem}
+  .nav-arrows{bottom:1rem}
+  .win{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="dots" id="dots"></div>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Title -->
+  <div class="slide active" data-slide="0">
+    <div style="font-size:3rem;margin-bottom:.5rem">🧀</div>
+    <h1><span class="gold">La Tabla</span></h1>
+    <p class="tagline">Charcutería &amp; Quesos Artesanales</p>
+    <div class="divider"></div>
+    <h2 style="font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:400;color:#ccc;margin-top:.5rem">Tu Plataforma Digital</h2>
+    <p style="margin-top:2rem;font-size:.9rem;color:#666">Presiona → para continuar</p>
+  </div>
+
+  <!-- Slide 2: El Problema -->
+  <div class="slide" data-slide="1">
+    <h2>El <span class="gold">Problema</span></h2>
+    <div class="divider"></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Pedidos por WhatsApp</h3>
+        <p>Los mensajes se pierden, no hay historial organizado, es difícil dar seguimiento</p>
+      </div>
+      <div class="card">
+        <div class="icon">📸</div>
+        <h3>Instagram como catálogo</h3>
+        <p>No hay precios claros, los posts se pierden en el feed, no es profesional</p>
+      </div>
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Difícil escalar</h3>
+        <p>Sin sistema, cada pedido es manual. Más clientes = más caos</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: La Solución -->
+  <div class="slide" data-slide="2">
+    <h2>La <span class="gold">Solución</span></h2>
+    <div class="divider"></div>
+    <p>Una plataforma e-commerce completa, diseñada exclusivamente para <strong style="color:var(--gold)">La Tabla</strong></p>
+    <div class="mockup">
+      <div class="mockup-bar"><span></span><span></span><span></span></div>
+      <div class="mockup-body">
+        <div class="logo-text">La Tabla</div>
+        <div class="mock-tag">Charcutería &amp; Quesos Artesanales</div>
+        <p style="margin-top:1rem;font-size:.8rem;color:#888">la-tabla.vercel.app</p>
+      </div>
+    </div>
+    <p style="font-size:.95rem;margin-top:1rem">Tu marca. Tu tienda. Tu control. <strong>100% profesional.</strong></p>
+  </div>
+
+  <!-- Slide 4: Funcionalidades -->
+  <div class="slide" data-slide="3">
+    <h2><span class="gold">Funcionalidades</span></h2>
+    <div class="divider"></div>
+    <div class="grid">
+      <div class="card"><div class="icon">🧀</div><h3>Catálogo Online</h3><p>Tablas, especialidades, servicios y talleres con fotos y descripciones</p></div>
+      <div class="card"><div class="icon">🎨</div><h3>Tabla Builder</h3><p>El cliente personaliza su tabla eligiendo ingredientes — experiencia única</p></div>
+      <div class="card"><div class="icon">🛒</div><h3>Carrito y Checkout</h3><p>Proceso de compra fluido con detalles de entrega y confirmación</p></div>
+      <div class="card"><div class="icon">📦</div><h3>Tracking de Pedidos</h3><p>El cliente sigue su pedido en tiempo real, sin preguntar por WhatsApp</p></div>
+      <div class="card"><div class="icon">⚙️</div><h3>Panel Admin</h3><p>Dashboard completo para gestionar todo el negocio desde un solo lugar</p></div>
+      <div class="card"><div class="icon">📧</div><h3>Emails Automáticos</h3><p>Confirmaciones, actualizaciones y notificaciones sin esfuerzo</p></div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Panel de Administración -->
+  <div class="slide" data-slide="4">
+    <h2>Panel de <span class="gold">Administración</span></h2>
+    <div class="divider"></div>
+    <p style="margin-bottom:1rem">Todo lo que necesitás para manejar tu negocio</p>
+    <ul class="features">
+      <li><span class="icon">📊</span> Dashboard con estadísticas de ventas e ingresos</li>
+      <li><span class="icon">📝</span> Gestión de productos — crear, editar, pausar</li>
+      <li><span class="icon">🧅</span> Gestión de ingredientes para el Tabla Builder</li>
+      <li><span class="icon">📋</span> Gestión de pedidos con estados y notificaciones</li>
+      <li><span class="icon">📅</span> Calendario de entregas y eventos</li>
+      <li><span class="icon">🖼️</span> Galería de fotos para el sitio</li>
+      <li><span class="icon">👥</span> Gestión de clientes</li>
+    </ul>
+  </div>
+
+  <!-- Slide 6: Ventajas -->
+  <div class="slide" data-slide="5">
+    <h2><span class="gold">Ventajas</span></h2>
+    <div class="divider"></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+      <div class="card"><div class="icon">🕐</div><h3>24/7</h3><p>Tu tienda nunca cierra. Los clientes pueden pedir en cualquier momento</p></div>
+      <div class="card"><div class="icon">🔍</div><h3>SEO Optimizado</h3><p>Aparecés en Google cuando buscan "charcutería Costa Rica"</p></div>
+      <div class="card"><div class="icon">✉️</div><h3>Emails Automáticos</h3><p>Confirmaciones y actualizaciones sin mover un dedo</p></div>
+      <div class="card"><div class="icon">💎</div><h3>Imagen Profesional</h3><p>Una presencia digital que refleja la calidad de tu producto</p></div>
+      <div class="card"><div class="icon">🚀</div><h3>Escalable</h3><p>Crece sin límites — más productos, más clientes, sin más trabajo manual</p></div>
+      <div class="card"><div class="icon">📱</div><h3>Mobile First</h3><p>Perfecto en celular, tablet y computadora</p></div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Modelo -->
+  <div class="slide" data-slide="6">
+    <h2>El <span class="gold">Modelo</span></h2>
+    <div class="divider"></div>
+    <div class="win">
+      <div class="win-card">
+        <div style="font-size:2.5rem;margin-bottom:.8rem">👨‍🍳</div>
+        <h3>Para Vos, Chef</h3>
+        <p><strong style="color:var(--gold)">Costo: $0</strong></p>
+        <p style="margin-top:.5rem">Plataforma completa sin inversión inicial. Sin mensualidades. Sin costos ocultos.</p>
+      </div>
+      <div class="win-card">
+        <div style="font-size:2.5rem;margin-bottom:.8rem">🤝</div>
+        <h3>Win-Win</h3>
+        <p>Diego maneja toda la plataforma — desarrollo, mantenimiento, actualizaciones.</p>
+        <p style="margin-top:.5rem"><strong style="color:var(--gold)">Comisión por venta</strong> como único costo.</p>
+      </div>
+    </div>
+    <p style="margin-top:2rem;font-size:.95rem;color:#888">Vos te enfocás en lo que mejor sabés hacer: crear tablas increíbles 🧀</p>
+  </div>
+
+  <!-- Slide 8: Próximos Pasos -->
+  <div class="slide" data-slide="7">
+    <h2>Próximos <span class="gold">Pasos</span></h2>
+    <div class="divider"></div>
+    <ul class="features">
+      <li><span class="icon">🌐</span> <strong>Dominio personalizado</strong> — latabla.cr o similar</li>
+      <li><span class="icon">💳</span> <strong>Pasarela de pago online</strong> — Tarjetas, SINPE Móvil integrado</li>
+      <li><span class="icon">📊</span> <strong>Analytics avanzados</strong> — Entender a tus clientes y optimizar</li>
+      <li><span class="icon">📲</span> <strong>Integración con redes sociales</strong> — Posts automáticos, catálogo en Instagram/Facebook</li>
+      <li><span class="icon">⭐</span> <strong>Reseñas de clientes</strong> — Construir confianza y reputación</li>
+      <li><span class="icon">🎁</span> <strong>Programa de lealtad</strong> — Recompensar a clientes frecuentes</li>
+    </ul>
+  </div>
+
+  <!-- Slide 9: Veámoslo en Vivo -->
+  <div class="slide" data-slide="8">
+    <h2>¡Veámoslo <span class="gold">en Vivo</span>!</h2>
+    <div class="divider"></div>
+    <p>La plataforma está lista y funcionando</p>
+    <div class="big-url">la-tabla.vercel.app</div>
+    <a href="https://la-tabla.vercel.app/" target="_blank" class="btn">🚀 Abrir La Tabla</a>
+    <div style="margin-top:2rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center">
+      <a href="https://instagram.com/latabla.cr" target="_blank" style="color:var(--gold);text-decoration:none;font-size:1rem">📸 @latabla.cr</a>
+      <a href="https://tiktok.com/@latablacr" target="_blank" style="color:var(--gold);text-decoration:none;font-size:1rem">🎵 @latablacr</a>
+    </div>
+  </div>
+
+  <!-- Slide 10: Contacto -->
+  <div class="slide" data-slide="9">
+    <h2><span class="gold">Contacto</span></h2>
+    <div class="divider"></div>
+    <div style="font-size:3rem;margin-bottom:1rem">🤝</div>
+    <p style="font-size:1.2rem;color:var(--cream);margin-bottom:.5rem"><strong>Diego</strong></p>
+    <p>Desarrollo &amp; Gestión de Plataforma</p>
+    <div style="margin-top:2rem;text-align:center">
+      <p style="color:#888;font-size:.95rem;margin-top:2rem">Gracias por tu confianza, Chef Stewart 🙏</p>
+    </div>
+    <div style="margin-top:2rem;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold)">La Tabla</div>
+    <p class="tagline" style="font-size:.9rem">Charcutería &amp; Quesos Artesanales</p>
+  </div>
+</div>
+
+<div class="nav-arrows">
+  <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">←</button>
+  <button class="nav-btn" id="nextBtn" onclick="navigate(1)">→</button>
+</div>
+<div class="counter" id="counter"></div>
+
+<script>
+let current=0;const total=10;
+function init(){const d=document.getElementById('dots');for(let i=0;i<total;i++){const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.onclick=()=>goTo(i);d.appendChild(dot)}update()}
+function goTo(n){if(n<0||n>=total||n===current)return;const slides=document.querySelectorAll('.slide');slides[current].classList.remove('active');slides[current].classList.add(n>current?'exit-left':'');setTimeout(()=>slides[current-n>0?current:current].classList.remove('exit-left'),600);current=n;slides[current].classList.add('active');update()}
+function navigate(dir){goTo(current+dir)}
+function update(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));document.getElementById('progress').style.width=((current+1)/total*100)+'%';document.getElementById('counter').textContent=(current+1)+' / '+total;document.getElementById('prevBtn').style.opacity=current===0?.3:1;document.getElementById('nextBtn').style.opacity=current===total-1?.3:1}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')navigate(1);if(e.key==='ArrowLeft')navigate(-1)});
+let touchX=0;document.addEventListener('touchstart',e=>touchX=e.touches[0].clientX);document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)navigate(d<0?1:-1)});
+init();
+</script>
+</body>
+</html>
