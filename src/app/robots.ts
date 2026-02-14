@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/admin", "/api", "/cuenta"],
       },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_APP_URL}/sitemap.xml`,
+    sitemap: `${process.env.NEXT_PUBLIC_APP_URL || "https://la-tabla.vercel.app"}/sitemap.xml`,
   };
 }

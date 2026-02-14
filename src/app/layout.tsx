@@ -18,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://la-tabla.vercel.app"),
   title: {
     default: "La Tabla — Charcutería & Quesos Artesanales | Costa Rica",
     template: "%s | La Tabla",

@@ -3,7 +3,7 @@ import { db } from "@/db";
 import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://la-tabla.vercel.app";
 
 const typeToPath: Record<string, string> = {
   tabla: "tablas",
