@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { categories } from "@/db/schema";
 import { asc } from "drizzle-orm";
+import { slugify } from "@/lib/utils";
 
 export async function GET() {
   try {
@@ -15,10 +16,6 @@ export async function GET() {
     console.error("GET /api/categories error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
-}
-
-function slugify(text: string): string {
-  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
 export async function POST(request: NextRequest) {

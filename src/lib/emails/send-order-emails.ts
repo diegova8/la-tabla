@@ -71,7 +71,7 @@ export async function sendOrderEmails(params: SendOrderEmailsParams) {
   results.forEach((r, i) => {
     const label = i === 0 ? "customer" : "admin";
     if (r.status === "fulfilled") {
-      console.log(`✅ Email ${label} sent:`, JSON.stringify(r.value));
+      // email sent successfully
     } else {
       console.error(`❌ Email ${label} failed:`, r.reason);
     }

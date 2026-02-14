@@ -7,6 +7,7 @@ import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ImageUpload } from "@/components/admin/image-upload";
+import { slugify } from "@/lib/utils";
 
 interface Product {
   id?: number;
@@ -38,10 +39,6 @@ const defaultProduct: Product = {
   displayOrder: 0,
   imageUrl: "",
 };
-
-function slugify(text: string): string {
-  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
 
 export function ProductForm({ product, onClose }: { product?: Product & { id: number }; onClose: () => void }) {
   const router = useRouter();
