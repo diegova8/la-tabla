@@ -259,13 +259,75 @@ p,.desc{font-size:1.05rem;line-height:1.7;max-width:700px;text-align:center;colo
 <div class="counter" id="counter"></div>
 
 <script>
-let current=0;const total=10;
-function init(){const d=document.getElementById('dots');for(let i=0;i<total;i++){const dot=document.createElement('div');dot.className='dot'+(i===0?' active':'');dot.onclick=()=>goTo(i);d.appendChild(dot)}update()}
-function goTo(n){if(n<0||n>=total||n===current)return;const slides=document.querySelectorAll('.slide');slides[current].classList.remove('active');slides[current].classList.add(n>current?'exit-left':'');setTimeout(()=>slides[current-n>0?current:current].classList.remove('exit-left'),600);current=n;slides[current].classList.add('active');update()}
-function navigate(dir){goTo(current+dir)}
-function update(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));document.getElementById('progress').style.width=((current+1)/total*100)+'%';document.getElementById('counter').textContent=(current+1)+' / '+total;document.getElementById('prevBtn').style.opacity=current===0?.3:1;document.getElementById('nextBtn').style.opacity=current===total-1?.3:1}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')navigate(1);if(e.key==='ArrowLeft')navigate(-1)});
-let touchX=0;document.addEventListener('touchstart',e=>touchX=e.touches[0].clientX);document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)navigate(d<0?1:-1)});
+let current = 0;
+const total = 10;
+
+function init() {
+  const d = document.getElementById('dots');
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => goTo(i);
+    d.appendChild(dot);
+  }
+  update();
+}
+
+function goTo(n) {
+  if (n < 0 || n >= total || n === current) return;
+  const slides = document.querySelectorAll('.slide');
+  const prev = current;
+  const goingForward = n > current;
+
+  // Remove all transition classes first
+  slides.forEach(s => {
+    s.classList.remove('active', 'exit-left');
+    s.style.transform = '';
+    s.style.opacity = '';
+  });
+
+  // Animate out current slide
+  if (goingForward) {
+    slides[prev].style.transform = 'translateX(-60px)';
+    slides[prev].style.opacity = '0';
+  } else {
+    slides[prev].style.transform = 'translateX(60px)';
+    slides[prev].style.opacity = '0';
+  }
+
+  // Set new current
+  current = n;
+
+  // Animate in new slide
+  slides[current].classList.add('active');
+
+  update();
+}
+
+function navigate(dir) { goTo(current + dir); }
+
+function update() {
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  document.getElementById('prevBtn').style.opacity = current === 0 ? .3 : 1;
+  document.getElementById('prevBtn').style.pointerEvents = current === 0 ? 'none' : 'all';
+  document.getElementById('nextBtn').style.opacity = current === total - 1 ? .3 : 1;
+  document.getElementById('nextBtn').style.pointerEvents = current === total - 1 ? 'none' : 'all';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); navigate(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
+});
+
+let touchX = 0;
+document.addEventListener('touchstart', e => touchX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const d = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(d) > 50) navigate(d < 0 ? 1 : -1);
+});
+
 init();
 </script>
 </body>
