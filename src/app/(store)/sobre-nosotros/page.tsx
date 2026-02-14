@@ -18,7 +18,7 @@ export default function SobreNosotrosPage() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
             <Image
-              src="/images/chef/stewart-preparando-taller.jpg"
+              src="/images/chef/stewart-preparando-taller.webp"
               alt="Chef Stewart Heigold preparando un taller"
               fill
               className="object-cover"
@@ -117,7 +117,7 @@ export default function SobreNosotrosPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
-              src="/images/brand/carrito-la-tabla-iluminado.jpg"
+              src="/images/brand/carrito-la-tabla-iluminado.webp"
               alt="Carrito La Tabla iluminado en evento"
               fill
               className="object-cover"

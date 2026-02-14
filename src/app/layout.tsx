@@ -55,8 +55,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider signInFallbackRedirectUrl="/" signUpFallbackRedirectUrl="/">
       <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+        <head>
+          {/* Preload hero LCP image */}
+          <link
+            rel="preload"
+            href="/images/detail/jamon-queso-closeup.webp"
+            as="image"
+            type="image/webp"
+          />
+          {/* DNS prefetch for external services */}
+          <link rel="dns-prefetch" href="https://clerk.la-tabla.vercel.app" />
+          <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        </head>
         <body className="font-sans antialiased bg-white text-stone-900">
           <ToastProvider>
             {children}

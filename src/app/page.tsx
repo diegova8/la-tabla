@@ -61,7 +61,7 @@ export default async function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="relative aspect-[4/5] overflow-hidden rounded-xl">
                 <Image
-                  src="/images/chef/stewart-preparando-taller.jpg"
+                  src="/images/chef/stewart-preparando-taller.webp"
                   alt="Chef Stewart Heigold preparando un taller"
                   fill
                   className="object-cover"
@@ -114,7 +114,7 @@ export default async function Home() {
               </div>
               <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
                 <Image
-                  src="/images/brand/carrito-la-tabla-iluminado.jpg"
+                  src="/images/brand/carrito-la-tabla-iluminado.webp"
                   alt="Carrito La Tabla iluminado en evento"
                   fill
                   className="object-cover"
@@ -140,7 +140,7 @@ export default async function Home() {
             name: "La Tabla",
             description:
               "Tablas de charcutería y quesos artesanales en Costa Rica. Chef privado, eventos y talleres.",
-            image: "https://la-tabla.vercel.app/images/detail/jamon-queso-closeup.jpg",
+            image: "https://la-tabla.vercel.app/images/detail/jamon-queso-closeup.webp",
             url: "https://la-tabla.vercel.app",
             telephone: "",
             address: {

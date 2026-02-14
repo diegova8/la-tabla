@@ -9,7 +9,7 @@ export function Hero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/detail/jamon-queso-closeup.jpg"
+          src="/images/detail/jamon-queso-closeup.webp"
           alt="Tabla de charcutería artesanal"
           fill
           className="object-cover opacity-40"
