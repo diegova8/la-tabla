@@ -30,34 +30,16 @@ jobs:
       - name: Wait for Vercel deploy
         run: sleep 60
 
-      - name: Audit landing page
+      - name: Audit all pages
         uses: treosh/lighthouse-ci-action@v12
-        id: landing
         with:
           urls: |
             https://la-tabla.vercel.app/
-          configPath: ./lighthouserc.json
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-
-      - name: Audit tablas page
-        uses: treosh/lighthouse-ci-action@v12
-        id: tablas
-        with:
-          urls: |
             https://la-tabla.vercel.app/tablas
-          configPath: ./lighthouserc.json
-          uploadArtifacts: true
-          temporaryPublicStorage: true
-
-      - name: Audit contacto page
-        uses: treosh/lighthouse-ci-action@v12
-        id: contacto
-        with:
-          urls: |
             https://la-tabla.vercel.app/contacto
           configPath: ./lighthouserc.json
           uploadArtifacts: true
+          artifactName: lighthouse-reports
           temporaryPublicStorage: true
 
       - name: Summary
