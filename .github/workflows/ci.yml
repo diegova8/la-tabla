@@ -1,0 +1,68 @@
+name: CI — Tests + Lighthouse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: 🧪 Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  lighthouse:
+    name: 🔦 Lighthouse Audit
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for Vercel deploy
+        run: sleep 60
+
+      - name: Audit landing page
+        uses: treosh/lighthouse-ci-action@v12
+        id: landing
+        with:
+          urls: |
+            https://la-tabla.vercel.app/
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Audit tablas page
+        uses: treosh/lighthouse-ci-action@v12
+        id: tablas
+        with:
+          urls: |
+            https://la-tabla.vercel.app/tablas
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Audit contacto page
+        uses: treosh/lighthouse-ci-action@v12
+        id: contacto
+        with:
+          urls: |
+            https://la-tabla.vercel.app/contacto
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Summary
+        run: |
+          echo "## 🔦 Lighthouse Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Reports uploaded to temporary public storage." >> $GITHUB_STEP_SUMMARY
+          echo "Check the artifacts for full reports." >> $GITHUB_STEP_SUMMARY
